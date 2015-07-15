@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:42:08 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/15 18:01:26 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/15 21:46:06 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ class IGraphics
 {
 public:
 	std::queue<t_action>	actions;
-
-	void					addFood(int x, int y) const;
 };
 
 #endif

@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.cpp                                            :+:      :+:    :+:   */
+/*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/15 18:03:40 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/15 18:37:48 by amaurer          ###   ########.fr       */
+/*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
+/*   Updated: 2015/07/15 21:58:16 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.hpp"
+#include "Snake.hpp"
 
-extern "C" void	lib(t_lel *lel)
+Snake::Snake(unsigned w, unsigned h) :
+	_width(w),
+	_height(h),
+	width(_width),
+	height(_height)
+{}
+
+void	Snake::setWidth(unsigned width)
 {
-	lel->lol1();
-	lel->lol2();
+	_width = width;
+}
+
+void	Snake::setHeight(unsigned height)
+{
+	_height = height;
 }

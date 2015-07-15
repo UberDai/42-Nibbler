@@ -6,29 +6,30 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/15 18:36:57 by amaurer          ###   ########.fr        #
+#    Updated: 2015/07/15 22:03:44 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 SRC_DIR		=	src/
 OBJ_DIR		=	build/
-INC_DIR		=	include libft ftlst
+INC_DIR		=	include libft
 BIN_DIR		=	bin/
 FILE_EXT	=	cpp
 
 NAME		=	snake
 BIN_NAME	=	$(BIN_DIR)$(NAME)
-SRC_FILES	=	main.cpp
+SRC_FILES	=	main.cpp \
+				Snake.cpp
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
 
 CC			=	clang++
 CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
-CC_LIBS		=	-lft -Llibft -lftlst -Lftlst
+CC_LIBS		=	-lft -Llibft
 
-all: ftlst libft $(BIN_NAME)
+all: libft $(BIN_NAME)
 	@echo "\033[32m•\033[0m $(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)
@@ -41,12 +42,10 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.$(FILE_EXT)
 
 clean:
 	make -C libft clean
-	make -C ftlst clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	make -C libft fclean
-	make -C ftlst fclean
 	rm -rf $(BIN_NAME)
 
 re: fclean all
@@ -54,10 +53,4 @@ re: fclean all
 libft:
 	@make -C libft
 
-ftlst:
-	git submodule init
-	git submodule update
-	git submodule foreach git pull origin master
-	make -C ftlst
-
-.PHONY: all re fclean clean libft ftlst
+.PHONY: all re fclean clean libft
