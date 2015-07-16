@@ -13,29 +13,33 @@
 #ifndef SNAKE_HPP
 # define SNAKE_HPP
 
-typedef enum	e_action
-{
+# include <string>
+# include "Level.hpp"
+
+typedef enum		e_action
+
 	TURN_LEFT,
 	TURN_RIGHT,
 	PAUSE,
 	QUIT
-}				t_action;
+}					t_action;
+
+typedef enum		e_block
+{
+	WALL = 1,
+	SPAWN,
+	HEAD = 10
+}					t_block;
 
 class Snake
 {
 protected:
-	double			_clock;
-	unsigned		_width;
-	unsigned		_height;
+	Level *			_level;
 
 public:
-	const unsigned	&width;
-	const unsigned	&height;
-
-	Snake(unsigned w, unsigned h);
-
-	void			setWidth(unsigned width);
-	void			setHeight(unsigned height);
+	Snake(void);
+	
+	void			loadLevel(const std::string);
 };
 
 #endif

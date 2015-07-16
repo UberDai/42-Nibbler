@@ -13,7 +13,7 @@
 
 SRC_DIR		=	src/
 OBJ_DIR		=	build/
-INC_DIR		=	include libft
+INC_DIR		=	include
 BIN_DIR		=	bin/
 FILE_EXT	=	cpp
 
@@ -29,7 +29,7 @@ CC			=	clang++
 CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
 CC_LIBS		=	-lft -Llibft
 
-all: libft $(BIN_NAME)
+all: $(BIN_NAME)
 	@echo "\033[32m•\033[0m $(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)
@@ -41,16 +41,11 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.$(FILE_EXT)
 	$(CC) $(CC_FLAGS)$(subst $() $(), -I, $(INC_DIR)) -o $@ -c $<
 
 clean:
-	make -C libft clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	make -C libft fclean
 	rm -rf $(BIN_NAME)
 
 re: fclean all
 
-libft:
-	@make -C libft
-
-.PHONY: all re fclean clean libft
+.PHONY: all re fclean clean

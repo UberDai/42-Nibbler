@@ -13,13 +13,11 @@
 #include "Snake.hpp"
 #include <iostream>
 
-int		main(void)
+int		main(int ac, char **av)
 {
-	Snake	snake(5, 5);
+	Snake	snake;
 
-	std::cout << snake.width << std::endl;
-	snake.setWidth(6);
-	std::cout << snake.width << std::endl;
+	snake.loadLevel("levels/level00");
 
 	return (0);
 }

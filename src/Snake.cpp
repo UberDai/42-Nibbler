@@ -12,19 +12,20 @@
 
 #include "Snake.hpp"
 
-Snake::Snake(unsigned w, unsigned h) :
-	_width(w),
-	_height(h),
-	width(_width),
-	height(_height)
+Snake::Snake(void) :
+	_level(NULL)
 {}
 
-void	Snake::setWidth(unsigned width)
+Snake::~Snake(void)
 {
-	_width = width;
+	if (_level != NULL)
+		delete _level;
 }
 
-void	Snake::setHeight(unsigned height)
+void	Snake::loadLevel(const std::string pathname)
 {
-	_height = height;
+	if (_level != NULL)
+		delete _level;
+
+	level = new Level(pathname);
 }
