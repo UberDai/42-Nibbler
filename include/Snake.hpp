@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/18 21:00:10 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/19 00:50:44 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <string>
 # include "Level.hpp"
 # include "Player.hpp"
+
+# define DEFAULT_SPEED	1000000
+# define SPEED_INC		1000
+# define MAX_SPEED		1000
 
 typedef enum		e_action
 {
@@ -27,21 +31,22 @@ typedef enum		e_action
 
 class Snake
 {
-protected:
-
 public:
 	static Snake *	instance;
 	Level *			level;
 	Player			player;
+	int		speed;
 
 	Snake();
 	~Snake();
 
 	void			loadLevel(const std::string);
 	void			startLevel();
+	void			gameOver() const;
 	void			launch();
 	void			update();
-	void			dump();
+	void			dump() const;
+	void			dump2()const ;
 };
 
 #endif

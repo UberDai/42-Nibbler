@@ -30,8 +30,8 @@ void	Level::_load(const std::string filename)
 {
 	std::ifstream	file(filename.c_str());
 	std::string		line;
-	unsigned		i;
-	unsigned		j;
+	unsigned		y;
+	unsigned		x;
 
 	_height = 0;
 
@@ -45,7 +45,7 @@ void	Level::_load(const std::string filename)
 
 	map = new unsigned*[_height];
 
-	i = 0;
+	y = 0;
 	while (std::getline(file, line))
 	{
 		if (_width == UINT_MAX)
@@ -56,26 +56,39 @@ void	Level::_load(const std::string filename)
 				throw; // TODO: bad line width
 		}
 
-		map[i] = new unsigned[_width];
+		map[y] = new unsigned[_width];
 
-		j = 0;
-		while (j < line.size())
+		x = 0;
+		while (x < line.size())
 		{
-			if (line[j] == ' ')
-				map[i][j] = 0;
-			else
-				map[i][j] = line[j] - '0';
+			map[y][x] = line[x] - '0';
 
-			if (map[i][j] == BLOCK_SPAWN)
+			if (map[y][x] == BLOCK_SPAWN)
 			{
-				_spawn.first = i;
-				_spawn.second = j;
+				_spawn.first = x;
+				_spawn.second = y;
 			}
-			j++;
+			x++;
 		}
 
-		i++;
+		y++;
 	}
+}
+
+unsigned	Level::getBlock(const t_block block) const
+{
+	if (block.first > width || block.second > height)
+		return (BLOCK_OUT);
+
+	return (map[block.second][block.first]);
+}
+
+void		Level::setBlock(const t_block block, unsigned value)
+{
+	if (getBlock(block) == BLOCK_OUT)
+		return ;
+
+	map[block.second][block.first] = value;
 }
 
 void	Level::setWidth(unsigned width)

@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/18 19:16:10 by amaurer          ###   ########.fr        #
+#    Updated: 2015/07/19 00:50:44 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ BIN_NAME	=	$(BIN_DIR)$(NAME)
 SRC_FILES	=	main.cpp \
 				Snake.cpp \
 				Level.cpp \
-				Player.cpp
+				Player.cpp \
+				Util.cpp
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))

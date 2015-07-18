@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:05:12 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/18 19:23:03 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/19 00:14:55 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 # include <string>
 
-# define BLOCK_WALL		1
-# define BLOCK_SPAWN	2
+# define BLOCK_OUT		0
+# define BLOCK_NONE		1
+# define BLOCK_WALL		2
+# define BLOCK_SPAWN	3
+# define BLOCK_FOOD		4
 # define BLOCK_HEAD		10
 
 typedef std::pair<unsigned, unsigned>	t_block;
@@ -41,6 +44,9 @@ public:
 
 	void			setWidth(unsigned);
 	void			setHeight(unsigned);
+	void			setBlock(t_block, unsigned);
+
+	unsigned		getBlock(t_block) const;
 };
 
 #endif
