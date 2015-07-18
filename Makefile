@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/15 22:03:44 by amaurer          ###   ########.fr        #
+#    Updated: 2015/07/18 19:16:10 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
 
 CC			=	clang++
 CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
-CC_LIBS		=	-lft -Llibft
+CC_LIBS		=
 
 all: $(BIN_NAME)
-	@echo "\033[32m•\033[0m $(NAME) is ready."
+	@echo "\033[32m•\033[0m $(BIN_DIR)$(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)
 	@mkdir -p $(BIN_DIR)

@@ -9,7 +9,7 @@ Level::Level(const std::string pathname) :
 	height(_height),
 	spawn(_spawn)
 {
-	_loadLevel(pathname);
+	_load(pathname);
 }
 
 Level::~Level(void)
@@ -28,7 +28,7 @@ Level::~Level(void)
 
 void	Level::_load(const std::string filename)
 {
-	std::ifstream	file(filename);
+	std::ifstream	file(filename.c_str());
 	std::string		line;
 	unsigned		i;
 	unsigned		j;
@@ -43,7 +43,7 @@ void	Level::_load(const std::string filename)
 
 	_width = UINT_MAX;
 
-	map = new (t_block*)[_height];
+	map = new unsigned*[_height];
 
 	i = 0;
 	while (std::getline(file, line))
@@ -53,17 +53,20 @@ void	Level::_load(const std::string filename)
 		else
 		{
 			if (_width == 0 || _width != line.size())
-				throw; // bad line width
+				throw; // TODO: bad line width
 		}
 
-		map[i] = new t_block[_width];
+		map[i] = new unsigned[_width];
 
 		j = 0;
 		while (j < line.size())
 		{
-			map[i][j] = atoi(line[j]);
+			if (line[j] == ' ')
+				map[i][j] = 0;
+			else
+				map[i][j] = line[j] - '0';
 
-			if (map[i][j] == spawn)
+			if (map[i][j] == BLOCK_SPAWN)
 			{
 				_spawn.first = i;
 				_spawn.second = j;

@@ -6,44 +6,66 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/15 21:58:16 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/18 20:35:33 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Snake.hpp"
+#include <iostream>
 
 Snake::Snake(void) :
-	_level(NULL)
+	level(NULL)
 {}
 
-Snake::~Snake(void)
+Snake::~Snake()
 {
-	if (_level != NULL)
-		delete _level;
+	if (level != NULL)
+		delete level;
 }
 
 void	Snake::loadLevel(const std::string pathname)
 {
+	if (level != NULL)
+		delete level;
+
+	level = new Level(pathname);
+
+	player.spawn();
+}
+
+void	Snake::launch()
+{
+	update();
+	dump();
+}
+
+void	Snake::update()
+{
+
+}
+
+void	Snake::dump()
+{
 	unsigned	x;
 	unsigned	y;
 
-	if (_level != NULL)
-		delete _level;
+	std::cout << "Size: " << player.size << std::endl;
+	std::cout << "Pending food: " << player.pendingFood << std::endl;
+	std::cout << std::endl;
 
-	level = new Level(pathname);
-	_playerSize = 0;
-	_pendingFood = 0;
+	y = 0;
+	while (y < level->height)
+	{
+		x = 0;
+		while (x < level->width)
+		{
+			std::cout << level->map[y][x] << ' ';
+			x++;
+		}
 
-	x = level->spawn.first;
-	y = level->spawn.second;
+		std::cout << std::endl;
+		y++;
+	}
 
-	level->map[y][x] = HEAD;
-	level->map[y][x + 1] = (int)HEAD + 1;
-	level->map[y][x + 2] = (int)HEAD + 2;
-}
-
-void	Snake::update(void)
-{
-
-	
+	std::cout << std::endl;
 }

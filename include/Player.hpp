@@ -1,47 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Snake.hpp                                          :+:      :+:    :+:   */
+/*   Player.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/18 21:00:10 by amaurer          ###   ########.fr       */
+/*   Created: 2015/07/18 18:49:11 by amaurer           #+#    #+#             */
+/*   Updated: 2015/07/18 20:29:17 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SNAKE_HPP
-# define SNAKE_HPP
+#ifndef PLAYER_HPP
+# define PLAYER_HPP
 
-# include <string>
+# include <vector>
 # include "Level.hpp"
-# include "Player.hpp"
 
-typedef enum		e_action
+typedef enum	e_orient
 {
-	TURN_LEFT,
-	TURN_RIGHT,
-	PAUSE,
-	QUIT
-}					t_action;
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+}				t_orient;
 
-class Snake
+class Player
 {
-protected:
-
 public:
-	static Snake *	instance;
-	Level *			level;
-	Player			player;
+	t_orient			orientation;
+	unsigned			size;
+	unsigned			pendingFood;
 
-	Snake();
-	~Snake();
+	Player();
 
-	void			loadLevel(const std::string);
-	void			startLevel();
-	void			launch();
-	void			update();
-	void			dump();
+	void		spawn();
+	void		move();
 };
 
 #endif
