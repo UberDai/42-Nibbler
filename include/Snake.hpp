@@ -35,11 +35,14 @@ class Snake
 {
 protected:
 	Level *			_level;
+	unsigned		_playerSize;
+	unsigned		_pendingFood;
 
 public:
 	Snake(void);
 	
 	void			loadLevel(const std::string);
+	void			startLevel(void);
 };
 
 #endif

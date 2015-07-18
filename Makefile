@@ -20,7 +20,9 @@ FILE_EXT	=	cpp
 NAME		=	snake
 BIN_NAME	=	$(BIN_DIR)$(NAME)
 SRC_FILES	=	main.cpp \
-				Snake.cpp
+				Snake.cpp \
+				Level.cpp \
+				Player.cpp
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))

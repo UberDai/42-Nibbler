@@ -4,7 +4,10 @@
 #include <limits.h>
 #include <cstdlib>
 
-Level::Level(const std::string pathname)
+Level::Level(const std::string pathname) :
+	width(_width),
+	height(_height),
+	spawn(_spawn)
 {
 	_loadLevel(pathname);
 }
@@ -40,7 +43,7 @@ void	Level::_load(const std::string filename)
 
 	_width = UINT_MAX;
 
-	map = new (unsigned*)[_height];
+	map = new (t_block*)[_height];
 
 	i = 0;
 	while (std::getline(file, line))
@@ -53,12 +56,18 @@ void	Level::_load(const std::string filename)
 				throw; // bad line width
 		}
 
-		map[i] = new int[_width];
+		map[i] = new t_block[_width];
 
 		j = 0;
 		while (j < line.size())
 		{
 			map[i][j] = atoi(line[j]);
+
+			if (map[i][j] == spawn)
+			{
+				_spawn.first = i;
+				_spawn.second = j;
+			}
 			j++;
 		}
 
