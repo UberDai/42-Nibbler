@@ -19,7 +19,7 @@
 class IGraphics
 {
 public:
-	std::queue<t_action>	actions;
+	t_action	*action;
 };
 
 #endif

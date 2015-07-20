@@ -35,7 +35,8 @@ public:
 	static Snake *	instance;
 	Level *			level;
 	Player			player;
-	int		speed;
+	int				speed;
+	bool			paused;
 
 	Snake();
 	~Snake();
@@ -45,8 +46,7 @@ public:
 	void			gameOver() const;
 	void			launch();
 	void			update();
-	void			dump() const;
-	void			dump2()const ;
+	void			dump(bool = false) const;
 };
 
 #endif

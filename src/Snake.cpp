@@ -18,7 +18,8 @@ Snake *	Snake::instance = NULL;
 
 Snake::Snake(void) :
 	level(NULL),
-	speed(DEFAULT_SPEED)
+	speed(DEFAULT_SPEED),
+	paused(true)
 {
 	instance = this;
 }
@@ -46,7 +47,7 @@ void	Snake::launch()
 
 void	Snake::update()
 {
-	dump2();
+	dump(true);
 	usleep(speed);
 
 	if (player.move() == false)
@@ -65,7 +66,7 @@ void	Snake::gameOver() const
 	std::cout << "LOST!" << std::endl;
 }
 
-void	Snake::dump() const
+void	Snake::dump(bool humanize = false) const
 {
 	unsigned	x;
 	unsigned	y;
@@ -76,65 +77,54 @@ void	Snake::dump() const
 	std::cout << "Pending food: " << player.pendingFood << std::endl;
 	std::cout << std::endl;
 
-	y = 0;
-	while (y < level->height)
+	if (humanize)
 	{
-		x = 0;
-		while (x < level->width)
+		y = 0;
+		while (y < level->height)
 		{
-			std::cout << level->map[y][x] << ' ';
-			x++;
-		}
-
-		std::cout << std::endl;
-		y++;
-	}
-
-	std::cout << "---------------" << std::endl;
-	std::cout << std::endl;
-}
-
-void	Snake::dump2() const
-{
-	unsigned	x;
-	unsigned	y;
-
-	std::cout << std::endl;
-	std::cout << "---------------" << std::endl;
-	std::cout << "   Size: " << player.size << std::endl;
-	std::cout << "   Pending food: " << player.pendingFood << std::endl;
-	std::cout << std::endl;
-
-	y = 0;
-	while (y < level->height)
-	{
-		std::cout << "   ";
-		x = 0;
-		while (x < level->width)
-		{
-			switch (level->map[y][x])
+			std::cout << "   ";
+			x = 0;
+			while (x < level->width)
 			{
-				case BLOCK_NONE:
-					std::cout << ' ';
-					break;
-				case BLOCK_WALL:
-					std::cout << "\u25AF";
-					break;
-				case BLOCK_HEAD:
-					std::cout << 'O';
-					break;
-				default:
-					std::cout << 'o';
+				switch (level->map[y][x])
+				{
+					case BLOCK_NONE:
+						std::cout << ' ';
+						break;
+					case BLOCK_WALL:
+						std::cout << "\u25AF";
+						break;
+					case BLOCK_HEAD:
+						std::cout << 'O';
+						break;
+					default:
+						std::cout << 'o';
+				}
+				std::cout << ' ';
+				x++;
 			}
-			std::cout << ' ';
-			x++;
-		}
 
-		std::cout << std::endl;
-		y++;
+			std::cout << std::endl;
+			y++;
+		}
+	}
+	else
+	{
+		y = 0;
+		while (y < level->height)
+		{
+			x = 0;
+			while (x < level->width)
+			{
+				std::cout << level->map[y][x] << ' ';
+				x++;
+			}
+
+			std::cout << std::endl;
+			y++;
+		}
 	}
 
-	std::cout << std::endl;
 	std::cout << "---------------" << std::endl;
 	std::cout << std::endl;
 }
