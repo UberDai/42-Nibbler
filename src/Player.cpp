@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 22:54:45 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 23:16:22 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ void	Player::spawn()
 	i = 1;
 	while (i < size)
 	{
+		head.first = x + 1;
+		head.second = y;
+
+		if (level->getBlock(head) != BLOCK_NONE)
+			throw Level::BadMapException();
+
 		level->map[y][x + i] = BLOCK_HEAD + i;
 		i++;
 	}

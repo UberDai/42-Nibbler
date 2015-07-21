@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:05:12 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 22:22:00 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 23:13:52 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEVEL_HPP
 
 # include <string>
+# include <exception>
 
 # define BLOCK_OUT		0
 # define BLOCK_NONE		1
@@ -34,6 +35,12 @@ protected:
 	void				_load(const std::string);
 
 public:
+	class BadMapException : std::exception
+	{
+	public:
+		virtual const char *	what() const throw();
+	};
+
 	const unsigned &	width;
 	const unsigned &	height;
 	const t_block &		spawn;
@@ -42,11 +49,11 @@ public:
 	Level(const std::string);
 	~Level(void);
 
-	void			setWidth(unsigned);
-	void			setHeight(unsigned);
-	void			setBlock(t_block, unsigned);
+	void				setWidth(unsigned);
+	void				setHeight(unsigned);
+	void				setBlock(t_block, unsigned);
 
-	unsigned		getBlock(t_block) const;
+	unsigned			getBlock(t_block) const;
 };
 
 #endif

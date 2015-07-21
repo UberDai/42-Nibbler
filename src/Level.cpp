@@ -53,7 +53,7 @@ void	Level::_load(const std::string filename)
 		else
 		{
 			if (_width == 0 || _width != line.size())
-				throw; // TODO: bad line width
+				throw Level::BadMapException();
 		}
 
 		map[y] = new unsigned[_width];
@@ -99,4 +99,9 @@ void	Level::setWidth(unsigned width)
 void	Level::setHeight(unsigned height)
 {
 	_height = height;
+}
+
+const char *	Level::BadMapException::what() const throw()
+{
+	return "Bad input map.";
 }

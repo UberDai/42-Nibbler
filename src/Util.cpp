@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/19 00:20:46 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/19 00:21:33 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 22:59:29 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	Util::getTime()
 	gettimeofday(&tod, NULL);
 	if (beginning == 0)
 		beginning = tod.tv_sec;
-	ret = (double)(tod.tv_sec - beginning);
-	ret += (double)tod.tv_usec / 1000000;
+	ret = static_cast<double>(tod.tv_sec - beginning);
+	ret += static_cast<double>(tod.tv_usec) / 1000000;
 	return (ret);
 }

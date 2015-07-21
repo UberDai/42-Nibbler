@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 22:55:38 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 23:15:02 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	Snake::loadLevel(const std::string pathname)
 		delete level;
 
 	level = new Level(pathname);
-
 	player.spawn();
 }
 

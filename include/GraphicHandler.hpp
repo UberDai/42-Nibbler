@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IGraphics.hpp                                      :+:      :+:    :+:   */
+/*   GraphicHandler.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/15 17:42:08 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 23:01:18 by amaurer          ###   ########.fr       */
+/*   Created: 2015/07/21 23:20:30 by amaurer           #+#    #+#             */
+/*   Updated: 2015/07/21 23:46:54 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IGRAPHICS_HPP
-# define IGRAPHICS_HPP
+#ifndef GRAPHICHANDLER_HPP
+# define GRAPHICHANDLER_HPP
 
-# include <queue>
+# include <string>
+# include <exception>
 # include "Snake.hpp"
 
-class IGraphics
+class GraphicHandler
 {
 public:
-	t_action	action;
+	class LibraryNotFoundException : std::exception
+	{
+	public:
+		virtual const char *	what() const throw();
+	};
+
+	class BadLibraryException : std::exception
+	{
+	public:
+		virtual const char *	what() const throw();
+	};
+
+	static t_action *	action_sym;
+
+	static void			loadLibrary(std::string);
 };
 
 #endif

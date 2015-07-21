@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 16:14:48 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/18 22:14:00 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 23:16:07 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@ int		main()
 {
 	Snake	snake;
 
-	snake.loadLevel("levels/level00");
+	try
+	{
+		snake.loadLevel("levels/level00");
+	}
+	catch (Level::BadMapException & e)
+	{
+		std::cout << "Error while loading the map: " << e.what() << std::endl;
+		return (EXIT_FAILURE);
+	}
+
 	snake.launch();
 
-	return (0);
+	return (EXIT_SUCCESS);
 }
