@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:05:12 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/19 00:14:55 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 22:22:00 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define BLOCK_NONE		1
 # define BLOCK_WALL		2
 # define BLOCK_SPAWN	3
-# define BLOCK_FOOD		4
+# define BLOCK_NOM		4
 # define BLOCK_HEAD		10
 
 typedef std::pair<unsigned, unsigned>	t_block;

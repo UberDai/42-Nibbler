@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:49:11 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/19 00:39:37 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 22:48:28 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ public:
 	t_block				head;
 	t_orient			orientation;
 	unsigned			size;
-	unsigned			pendingFood;
+	unsigned			pendingNom;
 
 	Player();
 
+	void		turnRight();
+	void		turnLeft();
 	void		spawn();
 	bool		move();
 	void		eat();

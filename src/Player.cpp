@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/19 00:45:10 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 22:54:45 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	Player::spawn()
 
 	orientation = WEST;
 	size = PLAYER_DEFAULT_SIZE;
-	pendingFood = 0;
+	pendingNom = 0;
 
 	level = Snake::instance->level;
 
@@ -94,12 +94,16 @@ void	Player::spawn()
 		level->map[y][x + i] = BLOCK_HEAD + i;
 		i++;
 	}
+
+	Snake::instance->generateNom();
 }
 
 void	Player::eat()
 {
-	pendingFood++;
+	pendingNom++;
 	size++;
+	Snake::instance->generateNom();
+	std::cout << "nom" << std::endl;
 }
 
 bool	Player::move()
@@ -118,7 +122,7 @@ bool	Player::move()
 	{
 		case BLOCK_NONE:
 			break;
-		case BLOCK_FOOD:
+		case BLOCK_NOM:
 			eat();
 			break;
 		default:
@@ -138,13 +142,23 @@ bool	Player::move()
 		i++;
 	}
 
-	if (pendingFood > 0)
+	if (pendingNom > 0)
 	{
-		pendingFood--;
+		pendingNom--;
 		level->setBlock(prevBlock, i + 1);
 	}
 	else
 		level->setBlock(prevBlock, BLOCK_NONE);
 
 	return true;
+}
+
+void	Player::turnRight()
+{
+	orientation = static_cast<t_orient>((orientation + 1) % 4);
+}
+
+void	Player::turnLeft()
+{
+	orientation = static_cast<t_orient>((orientation - 1 + 4) % 4);
 }

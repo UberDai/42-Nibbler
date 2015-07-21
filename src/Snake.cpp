@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/19 00:50:42 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 22:55:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ Snake::Snake(void) :
 	paused(true)
 {
 	instance = this;
+	srand(time(NULL));
 }
 
 Snake::~Snake()
@@ -38,6 +39,39 @@ void	Snake::loadLevel(const std::string pathname)
 	level = new Level(pathname);
 
 	player.spawn();
+}
+
+void	Snake::generateNom()
+{
+	unsigned	random;
+	unsigned	i;
+	t_block		block;
+
+	random = rand() % (level->height * level->width);
+	i = 0;
+
+	while (1)
+	{
+		block = { 0, 0 };
+		while (block.second < level->height)
+		{
+			block.first = 0;
+			while (block.first < level->width)
+			{
+				if (level->getBlock(block) == BLOCK_NONE)
+				{
+					if (i == random)
+					{
+						level->setBlock(block, BLOCK_NOM);
+						return ;
+					}
+					i++;
+				}
+				block.first++;
+			}
+			block.second++;
+		}
+	}
 }
 
 void	Snake::launch()
@@ -57,7 +91,6 @@ void	Snake::update()
 	}
 
 	speed = std::max<int>(speed - SPEED_INC, MAX_SPEED);
-	std::cout << speed << std::endl;
 	update();
 }
 
@@ -66,7 +99,7 @@ void	Snake::gameOver() const
 	std::cout << "LOST!" << std::endl;
 }
 
-void	Snake::dump(bool humanize = false) const
+void	Snake::dump(bool humanize) const
 {
 	unsigned	x;
 	unsigned	y;
@@ -74,7 +107,7 @@ void	Snake::dump(bool humanize = false) const
 	std::cout << std::endl;
 	std::cout << "---------------" << std::endl;
 	std::cout << "Size: " << player.size << std::endl;
-	std::cout << "Pending food: " << player.pendingFood << std::endl;
+	std::cout << "Pending nom: " << player.pendingNom << std::endl;
 	std::cout << std::endl;
 
 	if (humanize)
@@ -93,6 +126,9 @@ void	Snake::dump(bool humanize = false) const
 						break;
 					case BLOCK_WALL:
 						std::cout << "\u25AF";
+						break;
+					case BLOCK_NOM:
+						std::cout << "x";
 						break;
 					case BLOCK_HEAD:
 						std::cout << 'O';

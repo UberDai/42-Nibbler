@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/19 00:50:44 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/21 22:24:05 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ public:
 	void			loadLevel(const std::string);
 	void			startLevel();
 	void			gameOver() const;
+	void			generateNom();
 	void			launch();
 	void			update();
 	void			dump(bool = false) const;
