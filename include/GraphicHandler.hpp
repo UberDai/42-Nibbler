@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 23:20:30 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 23:46:54 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/22 01:59:02 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@
 # include <string>
 # include <exception>
 # include "Snake.hpp"
+# include "IGraphics.hpp"
+
+typedef IGraphics *	(*t_sym_instantiate)();
 
 class GraphicHandler
 {
 public:
-	class LibraryNotFoundException : std::exception
+	class LibraryNotFoundException : public std::exception
 	{
 	public:
 		virtual const char *	what() const throw();
 	};
 
-	class BadLibraryException : std::exception
+	class BadLibraryException : public std::exception
 	{
 	public:
 		virtual const char *	what() const throw();
 	};
 
-	static t_action *	action_sym;
+	static IGraphics *	instance;
 
 	static void			loadLibrary(std::string);
+	static void *		loadSymbol(void *, std::string);
 };
 
 #endif

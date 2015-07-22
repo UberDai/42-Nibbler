@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 23:16:22 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/22 00:32:35 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	Player::spawn()
 	i = 1;
 	while (i < size)
 	{
-		head.first = x + 1;
+		head.first = x + i;
 		head.second = y;
 
 		if (level->getBlock(head) != BLOCK_NONE)

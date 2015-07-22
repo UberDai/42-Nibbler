@@ -6,13 +6,14 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 23:15:02 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/22 01:36:21 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Snake.hpp"
 #include <iostream>
 #include <unistd.h>
+#include "Snake.hpp"
+#include "GraphicHandler.hpp"
 
 Snake *	Snake::instance = NULL;
 
@@ -80,7 +81,7 @@ void	Snake::launch()
 
 void	Snake::update()
 {
-	dump(true);
+	// dump(true);
 	usleep(speed);
 
 	if (player.move() == false)

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IGraphics.hpp                                      :+:      :+:    :+:   */
+/*   Graphics.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/15 17:42:08 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/22 01:17:39 by amaurer          ###   ########.fr       */
+/*   Created: 2015/07/22 00:21:02 by amaurer           #+#    #+#             */
+/*   Updated: 2015/07/22 00:58:20 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IGRAPHICS_HPP
-# define IGRAPHICS_HPP
+#ifndef GRAPHICS_HPP
+# define GRAPHICS_HPP
 
-# include <queue>
-# include "Snake.hpp"
+# include "IGraphics.hpp"
+# include "Level.hpp"
 
-class IGraphics
+class Graphics : public IGraphics
 {
 public:
-	t_action		glib_action;
-
-	virtual void	update(const Snake &) = 0;
+	void	update(const Snake &);
 };
+
+IGraphics *	glib_instantiate();
 
 #endif

@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/19 00:50:44 by amaurer          ###   ########.fr        #
+#    Updated: 2015/07/22 00:34:27 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_FILES	=	main.cpp \
 				Snake.cpp \
 				Level.cpp \
 				Player.cpp \
+				GraphicHandler.cpp \
 				Util.cpp
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
