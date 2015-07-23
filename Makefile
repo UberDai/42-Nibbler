@@ -3,13 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
+#    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/23 00:26:02 by amaurer          ###   ########.fr        #
+#    Updated: 2015/07/24 01:27:44 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 SRC_DIR		=	src/
 OBJ_DIR		=	build/
@@ -26,28 +25,35 @@ SRC_FILES	=	main.cpp \
 				GraphicsHandler.cpp \
 				Util.cpp
 
+export CXX		=	clang++
+export CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
+CC_LIBS			=	-rpath lib2/SFML-2.2/lib
+
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
 
-CC			=	clang++
-CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
-CC_LIBS		=
-
 all: $(BIN_NAME)
+	$(MAKE) -C lib1
+	$(MAKE) -C lib2
 	@echo "\033[32m•\033[0m $(BIN_DIR)$(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) -o $(BIN_NAME) $(CC_LIBS) $^
+	$(CXX) -o $(BIN_NAME) $(CC_LIBS) $^
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.$(FILE_EXT)
 	@mkdir -p $(@D)
-	$(CC) $(CC_FLAGS)$(subst $() $(), -I, $(INC_DIR)) -o $@ -c $<
+	$(CXX) $(CXXFLAGS)$(subst $() $(), -I, $(INC_DIR)) -o $@ -c $<
 
 clean:
+	$(MAKE) -C lib1 clean
+	$(MAKE) -C lib2 clean
 	rm -rf $(OBJ_DIR)
 
-fclean: clean
+fclean:
+	$(MAKE) -C lib1 fclean
+	$(MAKE) -C lib2 fclean
+	rm -rf $(OBJ_DIR)
 	rm -rf $(BIN_NAME)
 
 re: fclean all

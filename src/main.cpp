@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 16:14:48 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/23 00:26:31 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/24 01:09:43 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main()
 
 	try
 	{
-		ghandler.loadLibrary("lib1/lib1.so");
+		ghandler.loadLibrary("lib2/lib2.so");
 	}
 	catch (GraphicsHandler::LibraryNotFoundException & e)
 	{

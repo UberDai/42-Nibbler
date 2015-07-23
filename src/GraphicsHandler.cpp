@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   GraphicsHandler.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 23:23:17 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/23 00:25:09 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/24 01:12:20 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dlfcn.h>
+#include <iostream>
 #include "GraphicsHandler.hpp"
 
 IGraphics *		GraphicsHandler::instance = NULL;
@@ -23,7 +24,10 @@ void			GraphicsHandler::loadLibrary(std::string name)
 	handler = dlopen(name.c_str(), RTLD_NOW);
 
 	if (handler == NULL)
+	{
+		std::cout << dlerror() << std::endl;
 		throw LibraryNotFoundException();
+	}
 
 	instantiate = reinterpret_cast<t_sym_instantiate>(loadSymbol(handler, "glib_instantiate"));
 
