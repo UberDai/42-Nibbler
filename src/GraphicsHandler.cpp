@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GraphicHandler.cpp                                 :+:      :+:    :+:   */
+/*   GraphicsHandler.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 23:23:17 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/22 02:01:38 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/23 00:25:09 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dlfcn.h>
-#include "GraphicHandler.hpp"
+#include "GraphicsHandler.hpp"
 
-IGraphics *		GraphicHandler::instance = NULL;
+IGraphics *		GraphicsHandler::instance = NULL;
 
-void			GraphicHandler::loadLibrary(std::string name)
+void			GraphicsHandler::loadLibrary(std::string name)
 {
 	void *				handler;
 	t_sym_instantiate	instantiate;
@@ -30,7 +30,7 @@ void			GraphicHandler::loadLibrary(std::string name)
 	instance = instantiate();
 }
 
-void *		GraphicHandler::loadSymbol(void * handler, std::string name)
+void *		GraphicsHandler::loadSymbol(void * handler, std::string name)
 {
 	const char *	dlsym_error;
 	void *			symbol;
@@ -45,12 +45,12 @@ void *		GraphicHandler::loadSymbol(void * handler, std::string name)
 	return symbol;
 }
 
-const char *	GraphicHandler::LibraryNotFoundException::what() const throw()
+const char *	GraphicsHandler::LibraryNotFoundException::what() const throw()
 {
 	return "Library not found.";
 }
 
-const char *	GraphicHandler::BadLibraryException::what() const throw()
+const char *	GraphicsHandler::BadLibraryException::what() const throw()
 {
 	return "Bad graphic library.";
 }

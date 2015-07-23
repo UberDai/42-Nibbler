@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/22 00:32:35 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/23 02:16:54 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ t_block	Player::_findNextBlock(const t_block block) const
 		return (coord);
 
 	coord.first -= 2;
+	if (coord.first == UINT_MAX)
+		coord.first = 0;
+
 	if (level->getBlock(coord) == wantedBlock)
 		return (coord);
 
@@ -42,6 +45,9 @@ t_block	Player::_findNextBlock(const t_block block) const
 		return (coord);
 
 	coord.second -= 2;
+	if (coord.second == UINT_MAX)
+		coord.second = 0;
+
 	if (level->getBlock(coord) == wantedBlock)
 		return (coord);
 
@@ -70,10 +76,9 @@ void	Player::_moveBlock(t_block & block, t_orient orient) const
 
 void	Player::spawn()
 {
-	unsigned	x;
-	unsigned	y;
 	unsigned	i;
 	Level *		level;
+	t_block		block;
 
 	orientation = WEST;
 	size = PLAYER_DEFAULT_SIZE;
@@ -81,25 +86,26 @@ void	Player::spawn()
 
 	level = Snake::instance->level;
 
-	x = level->spawn.first;
-	y = level->spawn.second;
+	head.first = level->spawn.first;
+	head.second = level->spawn.second;
+	block = head;
 
-	level->map[y][x] = BLOCK_HEAD;
-	head.first = x;
-	head.second = y;
+	// Reversing orientation to place the snake's body
+	orientation = static_cast<t_orient>((orientation + 2) % 4);
 
-	i = 1;
+	i = 0;
 	while (i < size)
 	{
-		head.first = x + i;
-		head.second = y;
-
-		if (level->getBlock(head) != BLOCK_NONE)
+		if (level->getBlock(block) != BLOCK_NONE)
 			throw Level::BadMapException();
 
-		level->map[y][x + i] = BLOCK_HEAD + i;
+		level->setBlock(block, BLOCK_HEAD + i);
+		_moveBlock(block, orientation);
 		i++;
 	}
+
+	// Setting original orientation back
+	orientation = static_cast<t_orient>((orientation + 2) % 4);
 
 	Snake::instance->generateNom();
 }
@@ -120,9 +126,10 @@ bool	Player::move()
 	Level *		level;
 
 	level = Snake::instance->level;
-	prevBlock = head;
 
+	nextBlock = head;
 	_moveBlock(head, orientation);
+	prevBlock = head;
 
 	switch (level->getBlock(head))
 	{
@@ -135,11 +142,8 @@ bool	Player::move()
 			return false;
 	}
 
-	level->setBlock(head, BLOCK_HEAD);
+	i = BLOCK_HEAD - 1;
 
-	nextBlock = _findNextBlock(prevBlock);
-
-	i = BLOCK_HEAD;
 	while (level->getBlock(nextBlock) > i)
 	{
 		level->setBlock(prevBlock, level->getBlock(nextBlock));

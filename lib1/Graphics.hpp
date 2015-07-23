@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:21:02 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/22 00:58:20 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/23 00:22:44 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ public:
 	void	update(const Snake &);
 };
 
-IGraphics *	glib_instantiate();
+extern "C" IGraphics *	glib_instantiate();
 
 #endif

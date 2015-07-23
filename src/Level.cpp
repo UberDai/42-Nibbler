@@ -67,6 +67,7 @@ void	Level::_load(const std::string filename)
 			{
 				_spawn.first = x;
 				_spawn.second = y;
+				map[y][x] = BLOCK_NONE;
 			}
 			x++;
 		}
