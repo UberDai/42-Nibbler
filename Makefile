@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
+#    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/25 23:09:41 by amaurer          ###   ########.fr        #
+#    Updated: 2015/07/26 00:26:56 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
 
 all: $(BIN_NAME)
 	$(MAKE) -C lib1
-	# $(MAKE) -C lib2
+	$(MAKE) -C lib2
 	@echo "\033[32m•\033[0m $(BIN_DIR)$(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)

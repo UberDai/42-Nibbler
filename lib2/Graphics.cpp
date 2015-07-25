@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 06:41:32
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 00:37:13
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -32,8 +32,6 @@ Graphics::~Graphics(void)
 
 void		Graphics::update(void)
 {
-	std::cout << "update: "<< _snake.level->width << std::endl;
-
 	sf::Event event;
 
 	while (_window->pollEvent(event))
@@ -68,29 +66,26 @@ void		Graphics::getLevelInfo()
 		_drawScale = _scaleWidth / 2;
 	else
 		_drawScale = _scaleHeight / 2;
-
-	std::cout << _drawScale << std::endl;
 }
 
 void		Graphics::_switch(sf::Vector2<int> index, sf::RenderWindow * _window, sf::Vector2<int> position, sf::Vector2<int> size)
 {
-	switch (_snake.level->map[index.x][index.y])
+	switch (_snake.level->map[index.y][index.x])
 	{
 		case BLOCK_NONE:
 			SDrawer::drawCell(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
 			break;
 		case BLOCK_WALL:
-			// std::cout << "\u25AF";
+			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(200, 200, 200));
 			break;
 		case BLOCK_NOM:
-			// std::cout << "x";
+			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(242, 43, 0));
 			break;
 		case BLOCK_HEAD:
-			// std::cout << 'O';
+			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(76, 153, 0));
 			break;
 		default:
-		;
-			// std::cout << 'o';
+			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(204, 102, 0));
 	}
 }
 
