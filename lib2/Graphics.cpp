@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 05:37:33
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 06:41:32
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -72,6 +72,28 @@ void		Graphics::getLevelInfo()
 	std::cout << _drawScale << std::endl;
 }
 
+void		Graphics::_switch(sf::Vector2<int> index, sf::RenderWindow * _window, sf::Vector2<int> position, sf::Vector2<int> size)
+{
+	switch (_snake.level->map[index.x][index.y])
+	{
+		case BLOCK_NONE:
+			SDrawer::drawCell(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
+			break;
+		case BLOCK_WALL:
+			// std::cout << "\u25AF";
+			break;
+		case BLOCK_NOM:
+			// std::cout << "x";
+			break;
+		case BLOCK_HEAD:
+			// std::cout << 'O';
+			break;
+		default:
+		;
+			// std::cout << 'o';
+	}
+}
+
 void		Graphics::draw(void)
 {
 	unsigned int	middle = _winWidth / 2;
@@ -86,7 +108,7 @@ void		Graphics::draw(void)
 	{
 		for(j = 0; j < _snake.level->height; j++)
 		{
-			SDrawer::drawCell(_window, sf::Vector2f(x, y), sf::Vector2f(_drawScale, _drawScale));
+			_switch(sf::Vector2<int>(i, j), _window, sf::Vector2<int>(x, y), sf::Vector2<int>(_drawScale, _drawScale));
 			x += 20;
 			y += 20;
 		}

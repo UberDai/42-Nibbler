@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:56:40
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 05:35:34
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 06:14:49
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -44,6 +44,7 @@ private:
 
 	void				getLevelInfo();
 	void				draw();
+	void				_switch(sf::Vector2<int> index, sf::RenderWindow * _window, sf::Vector2<int> position, sf::Vector2<int> size);
 };
 
 extern "C" IGraphics *	glib_instantiate(const Snake &);
