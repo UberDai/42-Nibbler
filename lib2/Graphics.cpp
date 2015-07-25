@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 03:59:00
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 05:37:33
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -15,6 +15,7 @@
 
 # include <iostream>
 #include "Graphics.hpp"
+#include "SDrawer.hpp"
 
 Graphics::Graphics(const Snake & s) : _snake(s)
 {
@@ -62,6 +63,13 @@ void		Graphics::getLevelInfo()
 	_height = _snake.level->height;
 	_scaleWidth = _winWidth / _width;
 	_scaleHeight = _winHeight / _height;
+
+	if (_scaleWidth < _scaleHeight)
+		_drawScale = _scaleWidth / 2;
+	else
+		_drawScale = _scaleHeight / 2;
+
+	std::cout << _drawScale << std::endl;
 }
 
 void		Graphics::draw(void)
@@ -78,15 +86,12 @@ void		Graphics::draw(void)
 	{
 		for(j = 0; j < _snake.level->height; j++)
 		{
-			sf::RectangleShape rect;
-			rect.setSize(sf::Vector2f(10, 10));
-			rect.setPosition(x, y);
-			_window->draw(rect);
-			x += 12;
-			y += 12;
+			SDrawer::drawCell(_window, sf::Vector2f(x, y), sf::Vector2f(_drawScale, _drawScale));
+			x += 20;
+			y += 20;
 		}
-		x = middle - ((12 * i));
-		y = ((12 * i));
+		x = middle - ((20 * i));
+		y = ((20 * i));
 	}
 
 	_window->display();

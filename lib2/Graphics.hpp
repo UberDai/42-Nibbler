@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:56:40
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 03:38:32
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 05:35:34
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -36,6 +36,7 @@ private:
 	unsigned int		_height;
 	unsigned int		_scaleWidth;
 	unsigned int		_scaleHeight;
+	unsigned int		_drawScale;
 
 	Graphics(void);
 	Graphics(Graphics const &);

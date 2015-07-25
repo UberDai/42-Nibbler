@@ -14,7 +14,6 @@ LDFLAGS		+=	-lsfml-network
 LDFLAGS		+=	-lsfml-window
 LDFLAGS		+=	-lsfml-system
 
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
