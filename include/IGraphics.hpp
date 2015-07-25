@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IGraphics.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:42:08 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 01:57:27 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/25 22:46:46 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class IGraphics
 public:
 	t_action		glib_action;
 
-	virtual			~IGraphics(void) = default ;
+	virtual			~IGraphics(void) = default;
 	virtual void	update(void) = 0;
 };
 

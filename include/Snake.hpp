@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 02:48:26 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/25 23:27:44 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include "Level.hpp"
 # include "Player.hpp"
 
-# define DEFAULT_SPEED	1000000
-# define SPEED_INC		1000
-# define MAX_SPEED		1000
+# define DEFAULT_SPEED	1.0f
+# define SPEED_INC		0.01f
+# define MAX_SPEED		0.2f
 
 typedef enum		e_action
 {
@@ -34,12 +34,15 @@ typedef enum		e_action
 
 class Snake
 {
+protected:
+
 public:
 	static Snake *	instance;
 	Level *			level;
 	Player			player;
-	int				speed;
+	float			speed;
 	bool			paused;
+	float			clockCountdown;
 
 	Snake();
 	~Snake();
@@ -49,7 +52,7 @@ public:
 	void			gameOver() const;
 	void			generateNom();
 	void			launch();
-	void			update();
+	bool			update();
 	void			dump(bool = false) const;
 };
 

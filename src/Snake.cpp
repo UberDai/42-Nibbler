@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 01:57:55 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/25 23:31:31 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 #include <unistd.h>
 #include "Snake.hpp"
 #include "GraphicsHandler.hpp"
+#include "Util.hpp"
 
 Snake *	Snake::instance = NULL;
 
 Snake::Snake(void) :
 	level(NULL),
 	speed(DEFAULT_SPEED),
-	paused(true)
+	paused(true),
+	clockCountdown(0)
 {
 	instance = this;
 	srand(time(NULL));
@@ -76,23 +78,36 @@ void	Snake::generateNom()
 
 void	Snake::launch()
 {
-	update();
+	while (update());
 }
 
-void	Snake::update()
+bool	Snake::update()
 {
+	static float	lastTime;
+	float			currentTime;
+
+	if (lastTime == 0)
+		lastTime = Util::getTime();
+
 	GraphicsHandler::instance->update();
 
-	usleep(speed);
-
-	if (player.move() == false)
+	if (clockCountdown <= 0)
 	{
-		gameOver();
-		return ;
+		if (player.move() == false)
+		{
+			gameOver();
+			return false;
+		}
+
+		speed = std::max<float>(speed - SPEED_INC, MAX_SPEED);
+		clockCountdown += speed;
 	}
 
-	speed = std::max<int>(speed - SPEED_INC, MAX_SPEED);
-	update();
+	currentTime = Util::getTime();
+	clockCountdown -= currentTime - lastTime;
+	lastTime = currentTime;
+
+	return true;
 }
 
 void	Snake::gameOver() const

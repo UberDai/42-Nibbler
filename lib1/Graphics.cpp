@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Graphics.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:24:33 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 02:05:06 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/25 23:30:55 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	Graphics::update(void)
 {
 	unsigned	x;
 	unsigned	y;
+
+	if (_snake.clockCountdown > 0)
+		return ;
 
 	std::cout << std::endl;
 	std::cout << "---------------" << std::endl;
