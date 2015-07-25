@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/23 00:28:10 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/25 01:57:55 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	Snake::launch()
 
 void	Snake::update()
 {
-	GraphicsHandler::instance->update(*this);
+	GraphicsHandler::instance->update();
 
 	usleep(speed);
 

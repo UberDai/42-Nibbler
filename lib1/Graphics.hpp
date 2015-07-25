@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Graphics.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:21:02 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/23 00:22:44 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/25 02:26:08 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 # define GRAPHICS_HPP
 
 # include "IGraphics.hpp"
-# include "Level.hpp"
 
 class Graphics : public IGraphics
 {
 public:
-	void	update(const Snake &);
+	Graphics(const Snake &);
+	~Graphics(void);
+
+	void	update(void);
+private:
+	const Snake &		_snake;
 };
 
-extern "C" IGraphics *	glib_instantiate();
+extern "C" IGraphics *	glib_instantiate(const Snake &);
 
 #endif

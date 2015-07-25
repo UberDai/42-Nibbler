@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   IGraphics.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:42:08 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/22 01:17:39 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/25 01:57:27 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ class IGraphics
 public:
 	t_action		glib_action;
 
-	virtual void	update(const Snake &) = 0;
+	virtual			~IGraphics(void) = default ;
+	virtual void	update(void) = 0;
 };
 
 #endif
+

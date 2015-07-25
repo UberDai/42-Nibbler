@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GraphicHandler.hpp                                 :+:      :+:    :+:   */
+/*   GraphicsHandler.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 23:20:30 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/23 00:24:45 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/25 02:27:44 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include "Snake.hpp"
 # include "IGraphics.hpp"
 
-typedef IGraphics *	(*t_sym_instantiate)();
+typedef IGraphics *	(*t_sym_instantiate)(const Snake &);
 
 class GraphicsHandler
 {
 public:
+	GraphicsHandler(const Snake &);
+
 	class LibraryNotFoundException : public std::exception
 	{
 	public:
@@ -37,8 +39,10 @@ public:
 
 	static IGraphics *	instance;
 
-	static void			loadLibrary(std::string);
-	static void *		loadSymbol(void *, std::string);
+	void			loadLibrary(std::string);
+	void *			loadSymbol(void *, std::string);
+private:
+	const Snake &		_snake;
 };
 
 #endif

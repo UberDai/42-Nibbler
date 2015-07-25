@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 16:14:48 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/24 01:09:43 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/25 02:32:44 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int		main()
 {
 	Snake			snake;
-	GraphicsHandler	ghandler;
+	GraphicsHandler	ghandler(snake);
 
 	try
 	{

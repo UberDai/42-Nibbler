@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/22 01:17:48 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/25 02:48:26 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 typedef enum		e_action
 {
 	NONE = 0,
-	TURN_LEFT,
-	TURN_RIGHT,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
 	PAUSE,
 	QUIT
 }					t_action;

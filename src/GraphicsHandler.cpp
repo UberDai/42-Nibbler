@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 23:23:17 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/24 01:12:20 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/25 02:15:40 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include "GraphicsHandler.hpp"
 
 IGraphics *		GraphicsHandler::instance = NULL;
+
+GraphicsHandler::GraphicsHandler(const Snake & s) : _snake(s)
+{}
 
 void			GraphicsHandler::loadLibrary(std::string name)
 {
@@ -31,7 +34,7 @@ void			GraphicsHandler::loadLibrary(std::string name)
 
 	instantiate = reinterpret_cast<t_sym_instantiate>(loadSymbol(handler, "glib_instantiate"));
 
-	instance = instantiate();
+	instance = instantiate(_snake);
 }
 
 void *		GraphicsHandler::loadSymbol(void * handler, std::string name)

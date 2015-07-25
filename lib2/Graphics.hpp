@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:56:40
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-24 01:07:15
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-25 03:38:32
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -22,17 +22,30 @@
 class Graphics : public IGraphics
 {
 public:
-	Graphics(void);
+	Graphics(const Snake &);
 	~Graphics(void);
 
-	void	update(const Snake &);
+	void	update(void);
 
 private:
+	const Snake &		_snake;
+	sf::RenderWindow *	_window;
+	unsigned int		_winWidth;
+	unsigned int		_winHeight;
+	unsigned int		_width;
+	unsigned int		_height;
+	unsigned int		_scaleWidth;
+	unsigned int		_scaleHeight;
+
+	Graphics(void);
 	Graphics(Graphics const &);
 	Graphics &	operator=(Graphics const &);
 
+	void				getLevelInfo();
+	void				draw();
 };
 
-extern "C" IGraphics *	glib_instantiate();
+extern "C" IGraphics *	glib_instantiate(const Snake &);
+extern "C" void			glib_uninstantiate(IGraphics *);
 
 #endif
