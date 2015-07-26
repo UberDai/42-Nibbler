@@ -6,12 +6,13 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/19 00:20:46 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 23:06:07 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 20:19:29 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Util.hpp"
+#include <iostream>
 #include <sys/time.h>
+#include "Util.hpp"
 
 double	Util::getTime()
 {
@@ -25,4 +26,10 @@ double	Util::getTime()
 	ret = static_cast<double>(tod.tv_sec - beginning);
 	ret += static_cast<double>(tod.tv_usec) / 1000000;
 	return (ret);
+}
+
+int		Util::die(std::string message)
+{
+	std::cout << message << std::endl;
+	exit(EXIT_FAILURE);
 }

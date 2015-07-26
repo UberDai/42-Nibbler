@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 02:56:38 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 20:43:49 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,87 @@ void	Snake::loadLevel(const std::string pathname)
 	if (level != NULL)
 		delete level;
 
-	level = new Level(pathname);
-	player.spawn();
+	try
+	{
+		level = new Level(pathname);
+		player.spawn();
+	}
+	catch (Level::BadMapException & e)
+	{
+		std::cout << "Error while loading the map: " << e.what() << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	catch (std::exception & e)
+	{
+		std::cout << "An unexpected error has occured." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+}
+
+void	Snake::loadLevel(unsigned width, unsigned height)
+{
+	if (level != NULL)
+		delete level;
+
+	try
+	{
+		level = new Level(width, height);
+		player.spawn();
+	}
+	catch (Level::BadMapException & e)
+	{
+		std::cout << "Error while loading the map: " << e.what() << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	catch (std::exception & e)
+	{
+		std::cout << "An unexpected error has occured." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	Snake::loadLibrary(const std::string name)
+{
+	if (ghandler != NULL)
+		delete ghandler;
+
+	ghandler = new GraphicsHandler(*this);
+
+	try
+	{
+		ghandler->loadLibrary(name);
+	}
+	catch (GraphicsHandler::LibraryNotFoundException & e)
+	{
+		std::cout << "Library error: " << e.what() << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	catch (GraphicsHandler::BadLibraryException & e)
+	{
+		std::cout << "Library error: " << e.what() << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	Snake::removeNoms()
+{
+	t_block	block;
+
+	for (block.first = 0; block.first < level->width; block.first++)
+	{
+		for (block.second = 0; block.second < level->height; block.second++)
+		{
+			if (level->getBlock(block) == BLOCK_NOM)
+				level->setBlock(block, BLOCK_NONE);
+		}
+	}
+}
+
+void	Snake::generateNom(unsigned count)
+{
+	while (count-- != 0)
+		generateNom();
 }
 
 void	Snake::generateNom()
@@ -114,7 +193,7 @@ void	Snake::update()
 
 void	Snake::gameOver()
 {
-	std::cout << "LOST!" << std::endl;
+	std::cout << "You lost with a score of " << player.size << "." << std::endl;
 	stop = true;
 }
 

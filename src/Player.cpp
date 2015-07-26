@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 02:31:03 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 19:52:44 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,13 @@ void	Player::spawn()
 
 void	Player::eat()
 {
+	unsigned	random;
+
+	random = rand() % MULTINOM_RATE;
 	pendingNom++;
 	size++;
-	Snake::instance->generateNom();
+	Snake::instance->removeNoms();
+	Snake::instance->generateNom((random == 0) ? 2 : 1);
 }
 
 bool	Player::move()

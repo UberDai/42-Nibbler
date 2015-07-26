@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Level.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/07/26 19:38:35 by amaurer           #+#    #+#             */
+/*   Updated: 2015/07/26 20:46:42 by amaurer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "Level.hpp"
 #include <fstream>
 #include <limits.h>
 #include <cstdlib>
+#include <iostream>
+#include "Level.hpp"
 
 Level::Level(const std::string pathname) :
 	width(_width),
@@ -10,6 +22,32 @@ Level::Level(const std::string pathname) :
 	spawn(_spawn)
 {
 	_load(pathname);
+}
+
+Level::Level(unsigned w, unsigned h) :
+	_width(w),
+	_height(h),
+	width(_width),
+	height(_height),
+	spawn(_spawn)
+{
+	map = new unsigned*[height];
+
+	for (unsigned y = 0; y < height; y++)
+	{
+		map[y] = new unsigned[width];
+
+		for (unsigned x = 0; x < width; x++)
+		{
+			if (y == 0 || y == height - 1 || x == 0 || x == width - 1)
+				map[y][x] = BLOCK_WALL;
+			else
+				map[y][x] = BLOCK_NONE;
+		}
+	}
+
+	_spawn.first = width / 2;
+	_spawn.second = height / 2;
 }
 
 Level::~Level(void)

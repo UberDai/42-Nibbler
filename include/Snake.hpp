@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 02:58:38 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 20:38:25 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 
 # define DEFAULT_SPEED	1.0f
 # define SPEED_INC		30.0f
-# define MAX_SPEED		0.15f
+# define MAX_SPEED		0.10f
+# define MULTINOM_RATE	10
+
+class GraphicsHandler;
 
 typedef enum		e_action
 {
@@ -35,21 +38,26 @@ typedef enum		e_action
 class Snake
 {
 public:
-	static Snake *	instance;
-	Level *			level;
-	Player			player;
-	float			speed;
-	bool			paused;
-	float			clockCountdown;
-	bool			stop;
+	static Snake *		instance;
+	Level *				level;
+	Player				player;
+	float				speed;
+	bool				paused;
+	float				clockCountdown;
+	bool				stop;
+	GraphicsHandler *	ghandler;
 
 	Snake();
 	~Snake();
 
+	void			loadLevel(unsigned, unsigned);
 	void			loadLevel(const std::string);
+	void			loadLibrary(const std::string);
 	void			startLevel();
 	void			gameOver();
 	void			generateNom();
+	void			generateNom(unsigned);
+	void			removeNoms();
 	void			launch();
 	void			update();
 	void			handleAction();

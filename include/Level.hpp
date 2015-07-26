@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:05:12 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/21 23:13:52 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 20:29:50 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ public:
 	const t_block &		spawn;
 	unsigned **			map;
 
+	Level(unsigned, unsigned);
 	Level(const std::string);
 	~Level(void);
 
