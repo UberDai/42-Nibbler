@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 00:37:13
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:04:21
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -28,7 +28,10 @@ Graphics::Graphics(const Snake & s) : _snake(s)
 }
 
 Graphics::~Graphics(void)
-{}
+{
+	_window->close();
+	glib_action = QUIT;
+}
 
 void		Graphics::update(void)
 {
