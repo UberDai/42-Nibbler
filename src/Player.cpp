@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 19:52:44 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 20:57:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include <iostream>
 #include <climits>
 
-Player::Player()
+Player::Player() :
+	score(0)
 {}
 
 t_block	Player::_findNextBlock(const t_block block) const
@@ -118,6 +119,7 @@ void	Player::eat()
 	random = rand() % MULTINOM_RATE;
 	pendingNom++;
 	size++;
+	score++;
 	Snake::instance->removeNoms();
 	Snake::instance->generateNom((random == 0) ? 2 : 1);
 }

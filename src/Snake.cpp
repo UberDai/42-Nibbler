@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 20:43:49 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 21:09:03 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	Snake::loadLibrary(const std::string name)
 	if (ghandler != NULL)
 		delete ghandler;
 
+	std::cout << 4 << std::endl;
 	ghandler = new GraphicsHandler(*this);
+	std::cout << 5 << std::endl;
 
 	try
 	{
@@ -101,6 +103,7 @@ void	Snake::loadLibrary(const std::string name)
 		std::cout << "Library error: " << e.what() << std::endl;
 		exit(EXIT_FAILURE);
 	}
+	std::cout << 6 << std::endl;
 }
 
 void	Snake::removeNoms()
@@ -193,7 +196,7 @@ void	Snake::update()
 
 void	Snake::gameOver()
 {
-	std::cout << "You lost with a score of " << player.size << "." << std::endl;
+	std::cout << "You lost with a score of " << player.score << "." << std::endl;
 	stop = true;
 }
 
@@ -215,6 +218,14 @@ void	Snake::handleAction()
 			break;
 		case PAUSE:
 			paused = !paused;
+			break;
+		case LIB1:
+			paused = true;
+			loadLibrary("lib1/lib1.so");
+			break;
+		case LIB2:
+			paused = true;
+			loadLibrary("lib2/lib2.so");
 			break;
 		case QUIT:
 			stop = true;
