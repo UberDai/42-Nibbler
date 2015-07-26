@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   GraphicsHandler.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 23:23:17 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 02:15:40 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/26 21:09:11 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,40 @@
 
 IGraphics *		GraphicsHandler::instance = NULL;
 
-GraphicsHandler::GraphicsHandler(const Snake & s) : _snake(s)
+GraphicsHandler::GraphicsHandler(const Snake & s) :
+	_snake(s)
 {}
+
+GraphicsHandler::~GraphicsHandler()
+{
+	delete instance;
+	dlclose(_handler);
+}
 
 void			GraphicsHandler::loadLibrary(std::string name)
 {
-	void *				handler;
 	t_sym_instantiate	instantiate;
 
-	handler = dlopen(name.c_str(), RTLD_NOW);
+	_handler = dlopen(name.c_str(), RTLD_NOW);
 
-	if (handler == NULL)
+	if (_handler == NULL)
 	{
 		std::cout << dlerror() << std::endl;
 		throw LibraryNotFoundException();
 	}
 
-	instantiate = reinterpret_cast<t_sym_instantiate>(loadSymbol(handler, "glib_instantiate"));
+	instantiate = reinterpret_cast<t_sym_instantiate>(loadSymbol("glib_instantiate"));
 
 	instance = instantiate(_snake);
 }
 
-void *		GraphicsHandler::loadSymbol(void * handler, std::string name)
+void *		GraphicsHandler::loadSymbol(const std::string name)
 {
 	const char *	dlsym_error;
 	void *			symbol;
 
 	dlerror();
-	symbol = dlsym(handler, name.c_str());
+	symbol = dlsym(_handler, name.c_str());
 	dlsym_error = dlerror();
 
 	if (dlsym_error)

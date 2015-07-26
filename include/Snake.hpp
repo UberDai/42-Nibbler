@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 20:38:25 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 21:01:30 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef enum		e_action
 	LEFT,
 	RIGHT,
 	PAUSE,
-	QUIT
+	QUIT,
+	LIB1,
+	LIB2
 }					t_action;
 
 class Snake
@@ -50,18 +52,18 @@ public:
 	Snake();
 	~Snake();
 
-	void			loadLevel(unsigned, unsigned);
-	void			loadLevel(const std::string);
-	void			loadLibrary(const std::string);
-	void			startLevel();
-	void			gameOver();
-	void			generateNom();
-	void			generateNom(unsigned);
-	void			removeNoms();
-	void			launch();
-	void			update();
-	void			handleAction();
-	void			dump(bool = false) const;
+	void				loadLevel(unsigned, unsigned);
+	void				loadLevel(const std::string);
+	void				loadLibrary(const std::string);
+	void				startLevel();
+	void				gameOver();
+	void				generateNom();
+	void				generateNom(unsigned);
+	void				removeNoms();
+	void				launch();
+	void				update();
+	void				handleAction();
+	void				dump(bool = false) const;
 };
 
 #endif

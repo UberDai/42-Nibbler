@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:49:11 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 02:29:18 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 20:56:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ public:
 	t_orient			pendingOrientation;
 	unsigned			size;
 	unsigned			pendingNom;
+	unsigned			score;
 
 	Player();
 
