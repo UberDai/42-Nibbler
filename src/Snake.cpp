@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 23:31:31 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 02:56:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ Snake *	Snake::instance = NULL;
 Snake::Snake(void) :
 	level(NULL),
 	speed(DEFAULT_SPEED),
-	paused(true),
-	clockCountdown(0)
+	paused(false),
+	clockCountdown(0),
+	stop(false)
 {
 	instance = this;
 	srand(time(NULL));
@@ -63,10 +64,7 @@ void	Snake::generateNom()
 				if (level->getBlock(block) == BLOCK_NONE)
 				{
 					if (i == random)
-					{
-						level->setBlock(block, BLOCK_NOM);
-						return ;
-					}
+						return level->setBlock(block, BLOCK_NOM);
 					i++;
 				}
 				block.first++;
@@ -78,10 +76,12 @@ void	Snake::generateNom()
 
 void	Snake::launch()
 {
-	while (update());
+	stop = false;
+	while (!stop)
+		update();
 }
 
-bool	Snake::update()
+void	Snake::update()
 {
 	static float	lastTime;
 	float			currentTime;
@@ -90,29 +90,60 @@ bool	Snake::update()
 		lastTime = Util::getTime();
 
 	GraphicsHandler::instance->update();
+	handleAction();
+
+	if (paused)
+		return ;
 
 	if (clockCountdown <= 0)
 	{
-		if (player.move() == false)
-		{
-			gameOver();
-			return false;
-		}
+		player.orientation = player.pendingOrientation;
 
-		speed = std::max<float>(speed - SPEED_INC, MAX_SPEED);
-		clockCountdown += speed;
+		if (player.move() == false)
+			return gameOver();
+
+		speed = std::max<float>(speed - speed / SPEED_INC, MAX_SPEED);
+		while (clockCountdown <= 0)
+			clockCountdown += speed;
 	}
 
 	currentTime = Util::getTime();
 	clockCountdown -= currentTime - lastTime;
 	lastTime = currentTime;
-
-	return true;
 }
 
-void	Snake::gameOver() const
+void	Snake::gameOver()
 {
 	std::cout << "LOST!" << std::endl;
+	stop = true;
+}
+
+void	Snake::handleAction()
+{
+	switch (GraphicsHandler::instance->glib_action)
+	{
+		case UP:
+			player.changeOrientation(NORTH);
+			break;
+		case DOWN:
+			player.changeOrientation(SOUTH);
+			break;
+		case LEFT:
+			player.changeOrientation(WEST);
+			break;
+		case RIGHT:
+			player.changeOrientation(EAST);
+			break;
+		case PAUSE:
+			paused = !paused;
+			break;
+		case QUIT:
+			stop = true;
+		case NONE:
+			break;
+	}
+
+	GraphicsHandler::instance->glib_action = NONE;
 }
 
 void	Snake::dump(bool humanize) const

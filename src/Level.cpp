@@ -76,12 +76,12 @@ void	Level::_load(const std::string filename)
 	}
 }
 
-unsigned	Level::getBlock(const t_block block) const
+unsigned	Level::getBlock(t_block block) const
 {
-	if (block.first > width || block.second > height)
+	if (block.first >= width || block.second >= height)
 		return (BLOCK_OUT);
 
-	return (map[block.second][block.first]);
+	return map[block.second][block.first];
 }
 
 void		Level::setBlock(const t_block block, unsigned value)

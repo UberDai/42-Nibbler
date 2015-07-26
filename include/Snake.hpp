@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 23:27:44 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 02:58:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "Player.hpp"
 
 # define DEFAULT_SPEED	1.0f
-# define SPEED_INC		0.01f
-# define MAX_SPEED		0.2f
+# define SPEED_INC		30.0f
+# define MAX_SPEED		0.15f
 
 typedef enum		e_action
 {
@@ -34,8 +34,6 @@ typedef enum		e_action
 
 class Snake
 {
-protected:
-
 public:
 	static Snake *	instance;
 	Level *			level;
@@ -43,16 +41,18 @@ public:
 	float			speed;
 	bool			paused;
 	float			clockCountdown;
+	bool			stop;
 
 	Snake();
 	~Snake();
 
 	void			loadLevel(const std::string);
 	void			startLevel();
-	void			gameOver() const;
+	void			gameOver();
 	void			generateNom();
 	void			launch();
-	bool			update();
+	void			update();
+	void			handleAction();
 	void			dump(bool = false) const;
 };
 

@@ -37,10 +37,15 @@ void		Graphics::update(void)
 	while (_window->pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed)
+		{
 			_window->close();
+			glib_action = QUIT;
+		}
 		else if (event.type == sf::Event::KeyPressed)
 		{
 			if (event.key.code == sf::Keyboard::Escape)
+				glib_action = QUIT;
+			if (event.key.code == sf::Keyboard::P)
 				glib_action = PAUSE;
 			if (event.key.code == sf::Keyboard::Up)
 				glib_action = UP;
@@ -101,14 +106,15 @@ void		Graphics::draw(void)
 	unsigned int j;
 	for (i = 0; i < _snake.level->width; i++)
 	{
+		x = middle - (20 * i);
+		y = 20 * i;
+
 		for(j = 0; j < _snake.level->height; j++)
 		{
 			_switch(sf::Vector2<int>(i, j), _window, sf::Vector2<int>(x, y), sf::Vector2<int>(_drawScale, _drawScale));
 			x += 20;
 			y += 20;
 		}
-		x = middle - ((20 * i));
-		y = ((20 * i));
 	}
 
 	_window->display();

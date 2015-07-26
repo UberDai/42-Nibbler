@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 18:54:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/23 02:16:54 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/26 02:31:03 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	Player::_moveBlock(t_block & block, t_orient orient) const
 		case NORTH:
 			block.second -= 1;
 			break;
-		case EAST:
+		case WEST:
 			block.first += 1;
 			break;
 		case SOUTH:
 			block.second += 1;
 			break;
-		case WEST:
+		case EAST:
 			block.first -= 1;
 	}
 }
@@ -81,6 +81,7 @@ void	Player::spawn()
 	t_block		block;
 
 	orientation = WEST;
+	pendingOrientation = orientation;
 	size = PLAYER_DEFAULT_SIZE;
 	pendingNom = 0;
 
@@ -115,7 +116,6 @@ void	Player::eat()
 	pendingNom++;
 	size++;
 	Snake::instance->generateNom();
-	std::cout << "nom" << std::endl;
 }
 
 bool	Player::move()
@@ -163,12 +163,10 @@ bool	Player::move()
 	return true;
 }
 
-void	Player::turnRight()
+void	Player::changeOrientation(t_orient orient)
 {
-	orientation = static_cast<t_orient>((orientation + 1) % 4);
-}
-
-void	Player::turnLeft()
-{
-	orientation = static_cast<t_orient>((orientation - 1 + 4) % 4);
+	if (orientation % 2 != orient % 2)
+		pendingOrientation = orient;
+	else
+		pendingOrientation = orientation;
 }
