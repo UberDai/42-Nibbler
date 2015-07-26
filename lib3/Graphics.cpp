@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:03:35
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:23:34
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -17,7 +17,11 @@
 #include "Graphics.hpp"
 
 extern "C" {
+	#include <unistd.h>
+	#include <OpenGL/gl3.h>
 	#include <mlx.h>
+
+	int test(void) { return write(1, "test\n", 5); }
 }
 
 Graphics::Graphics(const Snake & s) : _snake(s)
@@ -26,6 +30,9 @@ Graphics::Graphics(const Snake & s) : _snake(s)
 	_winHeight = 600;
 	// _window = new sf::RenderWindow(sf::VideoMode(_winWidth, _winHeight), "Da SFML Snake");
 	_mlx = mlx_init();
+
+	mlx_loop_hook ( _mlx, &test, NULL );
+
 	_window = mlx_new_window(_mlx, _winWidth, _winHeight, (char *)"Da MLX Snake");
 }
 
@@ -70,62 +77,61 @@ void		Graphics::getLevelInfo()
 		_drawScale = _scaleHeight / 2;
 }
 
-// void		Graphics::_switch(sf::Vector2<int> index, sf::RenderWindow * _window, sf::Vector2<int> position, sf::Vector2<int> size)
-// {
-// 	switch (_snake.level->map[index.y][index.x])
-// 	{
-// 		case BLOCK_NONE:
-// 			SDrawer::drawCell(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
-// 			break;
-// 		case BLOCK_WALL:
-// 			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(200, 200, 200));
-// 			break;
-// 		case BLOCK_NOM:
-// 			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(242, 43, 0));
-// 			break;
-// 		case BLOCK_HEAD:
-// 			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(76, 153, 0));
-// 			break;
-// 		default:
-// 			SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(204, 102, 0));
-// 	}
-// }
+void		Graphics::_switch(int x, int y, int width, int height)
+{
+	switch (_snake.level->map[y][x])
+	{
+		case BLOCK_NONE:
+			drawCell(x * width, y * width, width, height, 0xffffff);
+			// SDrawer::drawCell(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
+			break;
+		case BLOCK_WALL:
+			drawCell(x * width, y * width, width, height, 0xacacac);
+			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(200, 200, 200));
+			break;
+		case BLOCK_NOM:
+			drawCell(x * width, y * width, width, height, 0xff0000);
+			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(242, 43, 0));
+			break;
+		case BLOCK_HEAD:
+			drawCell(x * width, y * width, width, height, 0xcccc00);
+			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(76, 153, 0));
+			break;
+		default:
+			drawCell(x * width, y * width, width, height, 0x00ee00);
+		;
+			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(204, 102, 0));
+	}
+}
 
-void		Graphics::drawCell(int x, int y, int width, int height)
+void		Graphics::drawCell(int x, int y, int width, int height, int color)
 {
 	for (int i = 0; i < width; ++i)
 	{
 		for (int j = 0; j < height; ++j)
 		{
-			mlx_pixel_put( _mlx, _window, x + i, y + j, 0xFF0000 );
+			std::cout << "pixelput : " << x + i << " : " << y + j << std::endl;
+			mlx_pixel_put( _mlx, _window, x + i, y + j, color);
 		}
 	}
 }
 
 void		Graphics::draw(void)
 {
-	unsigned int	middle = _winWidth / 2;
 	getLevelInfo();
-	// _window->clear();
 
-	unsigned int x = middle;
-	unsigned int y = 0;
 	unsigned int i;
 	unsigned int j;
 	for (i = 0; i < _snake.level->width; i++)
 	{
 		for(j = 0; j < _snake.level->height; j++)
 		{
-			drawCell(i * 10, j * 10, 10, 10);
-			// mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );
-			// _switch(sf::Vector2<int>(i, j), _window, sf::Vector2<int>(x, y), sf::Vector2<int>(_drawScale, _drawScale));
-			x += 20;
-			y += 20;
+			_switch(i, j, 10, 10);
 		}
-		x = middle - ((20 * i));
-		y = ((20 * i));
 	}
 
+	glFlush();
+	// mlx_loop(_mlx);
 	// _window->display();
 }
 

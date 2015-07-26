@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:56:40
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:00:19
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:20:24
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -43,8 +43,9 @@ private:
 	Graphics &	operator=(Graphics const &);
 
 	void				getLevelInfo();
+	void				_switch(int x, int y, int width, int height);
 	void				draw();
-	void				drawCell(int x, int y, int width, int height);
+	void				drawCell(int x, int y, int width, int height, int color);
 
 };
 
