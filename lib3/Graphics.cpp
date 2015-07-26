@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:23:34
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-27 00:25:28
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -31,7 +31,7 @@ Graphics::Graphics(const Snake & s) : _snake(s)
 	// _window = new sf::RenderWindow(sf::VideoMode(_winWidth, _winHeight), "Da SFML Snake");
 	_mlx = mlx_init();
 
-	mlx_loop_hook ( _mlx, &test, NULL );
+	// mlx_key_hook ( _mlx, &test, NULL );
 
 	_window = mlx_new_window(_mlx, _winWidth, _winHeight, (char *)"Da MLX Snake");
 }
@@ -130,7 +130,7 @@ void		Graphics::draw(void)
 		}
 	}
 
-	glFlush();
+	mlx_do_sync(_mlx);
 	// mlx_loop(_mlx);
 	// _window->display();
 }
