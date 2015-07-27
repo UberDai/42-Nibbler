@@ -4,10 +4,10 @@ OBJ			=	$(subst .cpp,.o,$(SRC))
 
 CXX			?=	clang++
 CXXFLAGS	?=	-Wall -Wextra -Werror -std=c++11
-CXXFLAGS	+=	-I../include -ISFML-2.2/include
+CXXFLAGS	+=	-I../include -ISFML/include
 
 LDFLAGS		=	-shared -fPIC
-LDFLAGS		+=	-LSFML-2.2/lib
+LDFLAGS		+=	-LSFML/lib
 LDFLAGS		+=	-lsfml-audio
 LDFLAGS		+=	-lsfml-graphics
 LDFLAGS		+=	-lsfml-network

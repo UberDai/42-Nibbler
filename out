@@ -1,0 +1,10 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Volumes/distant/C++/42-Nibbler/lib2/SFML
+-- Could NOT find Doxygen (missing:  DOXYGEN_EXECUTABLE) 
+-- Using Cocoa for window creation
+-- Using NSGL for context creation
+-- Building GLFW only for the native architecture
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Volumes/distant/C++/42-Nibbler/lib3/glfw

@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/28 00:46:19 by adebray          ###   ########.fr        #
+#    Updated: 2015/07/28 01:21:44 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,19 +27,19 @@ SRC_FILES	=	main.cpp \
 
 export CXX		=	clang++
 export CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
-LDFLAGS			+=	-rpath lib2/SFML-2.2/lib
+LDFLAGS			=	-rpath lib2/SFML/lib
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
 
+all: _depend $(BIN_NAME)
+	@echo "\033[32m•\033[0m $(BIN_DIR)$(NAME) is ready."
+
 _depend:
-	$(shell ./.configure)
+	./configure.sh
 	$(MAKE) -C lib1
 	$(MAKE) -C lib2
 	$(MAKE) -C lib3
-
-all: _depend $(BIN_NAME)
-	@echo "\033[32m•\033[0m $(BIN_DIR)$(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)
 	@mkdir -p $(BIN_DIR)
@@ -64,4 +64,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all re fclean clean
+.PHONY: all re fclean clean $(BIN_NAME)
