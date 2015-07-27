@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:04:21
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-27 02:07:50
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -70,10 +70,13 @@ void		Graphics::getLevelInfo()
 	_scaleWidth = _winWidth / _width;
 	_scaleHeight = _winHeight / _height;
 
-	if (_scaleWidth < _scaleHeight)
-		_drawScale = _scaleWidth / 2;
-	else
-		_drawScale = _scaleHeight / 2;
+	std::cout << "DEBUG: " <<
+	"_width: " << _width <<
+	"_height: " << _height <<
+	"_scaleWidth: " << _scaleWidth <<
+	"_scaleHeight: " << _scaleHeight << std::endl;
+
+	_drawScale = _scaleHeight / 2;
 }
 
 void		Graphics::_switch(sf::Vector2<int> index, sf::RenderWindow * _window, sf::Vector2<int> position, sf::Vector2<int> size)
@@ -109,14 +112,14 @@ void		Graphics::draw(void)
 	unsigned int j;
 	for (i = 0; i < _snake.level->width; i++)
 	{
-		x = middle - (20 * i);
-		y = 20 * i;
+		x = middle - (_drawScale * i);
+		y = _drawScale * i;
 
 		for(j = 0; j < _snake.level->height; j++)
 		{
 			_switch(sf::Vector2<int>(i, j), _window, sf::Vector2<int>(x, y), sf::Vector2<int>(_drawScale, _drawScale));
-			x += 20;
-			y += 20;
+			x += _drawScale;
+			y += _drawScale;
 		}
 	}
 

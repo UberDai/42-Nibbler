@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-27 00:25:28
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-27 01:58:18
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -110,7 +110,6 @@ void		Graphics::drawCell(int x, int y, int width, int height, int color)
 	{
 		for (int j = 0; j < height; ++j)
 		{
-			std::cout << "pixelput : " << x + i << " : " << y + j << std::endl;
 			mlx_pixel_put( _mlx, _window, x + i, y + j, color);
 		}
 	}

@@ -4,12 +4,12 @@ OBJ			=	$(subst .cpp,.o,$(SRC))
 
 CXX			?=	clang++
 CXXFLAGS	?=	-Wall -Wextra -Werror -std=c++11
-CXXFLAGS	+=	-I../include -fPIC
+CXXFLAGS	+=	-I../include -Iminilibx -fPIC
 
 LDFLAGS		=	-shared -undefined dynamic_lookup
-# LDFLAGS		+=	/usr/local/lib/libmlx.a -framework OpenGL -framework AppKit
 
 all: $(NAME)
+	$(MAKE) -C minilibx
 
 $(NAME): $(OBJ)
 	$(CXX) $(LDFLAGS) -o $(NAME) $(OBJ)
