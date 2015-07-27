@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/28 00:32:54 by adebray          ###   ########.fr        #
+#    Updated: 2015/07/28 00:46:19 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
 
 _depend:
-	git submodule init
-	git submodule update
+	$(shell ./.configure)
 	$(MAKE) -C lib1
 	$(MAKE) -C lib2
 	$(MAKE) -C lib3
