@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/27 01:56:42 by adebray          ###   ########.fr        #
+#    Updated: 2015/07/28 00:28:29 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRC_FILES	=	main.cpp \
 
 export CXX		=	clang++
 export CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
-LDFLAGS			=	-force_load lib3/minilibx/libmlx.a -framework OpenGL -framework AppKit
 LDFLAGS			+=	-rpath lib2/SFML-2.2/lib
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))

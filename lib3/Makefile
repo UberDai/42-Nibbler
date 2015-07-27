@@ -9,12 +9,12 @@ CXXFLAGS	+=	-I../include -Iminilibx -fPIC
 LDFLAGS		=	-shared -undefined dynamic_lookup
 
 all: $(NAME)
-	$(MAKE) -C minilibx
 
 $(NAME): $(OBJ)
 	$(CXX) $(LDFLAGS) -o $(NAME) $(OBJ)
 
-re: fclean all
+re: fclean
+	$(MAKE) all
 
 clean:
 	rm -rf $(OBJ)

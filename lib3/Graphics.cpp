@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-27 01:58:18
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-28 00:27:35
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -18,8 +18,8 @@
 
 extern "C" {
 	#include <unistd.h>
-	#include <OpenGL/gl3.h>
-	#include <mlx.h>
+	// #include <OpenGL/gl3.h>
+	// #include <mlx.h>
 
 	int test(void) { return write(1, "test\n", 5); }
 }
@@ -29,11 +29,17 @@ Graphics::Graphics(const Snake & s) : _snake(s)
 	_winWidth = 800;
 	_winHeight = 600;
 	// _window = new sf::RenderWindow(sf::VideoMode(_winWidth, _winHeight), "Da SFML Snake");
-	_mlx = mlx_init();
+	// _mlx = mlx_init();
 
 	// mlx_key_hook ( _mlx, &test, NULL );
+	// int	mlx_hook(void *win_ptr, int x_event, int x_mask,
+ //                 int (*funct)(), void *param);
+	// _window = mlx_new_window(_mlx, _winWidth, _winHeight, (char *)"Da MLX Snake");
 
-	_window = mlx_new_window(_mlx, _winWidth, _winHeight, (char *)"Da MLX Snake");
+
+	// mlx_key_hook ( _window, &test, NULL );
+	// mlx_hook(_window, 3, 0, &test, NULL);
+
 }
 
 Graphics::~Graphics(void)
@@ -106,13 +112,18 @@ void		Graphics::_switch(int x, int y, int width, int height)
 
 void		Graphics::drawCell(int x, int y, int width, int height, int color)
 {
-	for (int i = 0; i < width; ++i)
-	{
-		for (int j = 0; j < height; ++j)
-		{
-			mlx_pixel_put( _mlx, _window, x + i, y + j, color);
-		}
-	}
+	(void)x;
+	(void)y;
+	(void)width;
+	(void)height;
+	(void)color;
+	// for (int i = 0; i < width; ++i)
+	// {
+	// 	for (int j = 0; j < height; ++j)
+	// 	{
+			// mlx_pixel_put( _mlx, _window, x + i, y + j, color);
+	// 	}
+	// }
 }
 
 void		Graphics::draw(void)
@@ -129,7 +140,7 @@ void		Graphics::draw(void)
 		}
 	}
 
-	mlx_do_sync(_mlx);
+	// mlx_do_sync(_mlx);
 	// mlx_loop(_mlx);
 	// _window->display();
 }
