@@ -2,16 +2,19 @@ NAME		=	lib3.so
 SRC			=	$(shell ls | grep ".cpp")
 OBJ			=	$(subst .cpp,.o,$(SRC))
 
-CXX			?=	clang++
-CXXFLAGS	?=	-Wall -Wextra -Werror -std=c++11
-CXXFLAGS	+=	-I../include -Iglfw/include -fPIC
+CPP			?=	clang++
+CPPFLAGS	?=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	+=	-I../include -Iglfw/include -fPIC
 
 LDFLAGS		=	-shared -undefined dynamic_lookup
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(LDFLAGS) -o $(NAME) $(OBJ)
+	$(CPP) $(LDFLAGS) -o $(NAME) $(OBJ)
+
+%.o: %.cpp
+	$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 re: fclean
 	$(MAKE) all

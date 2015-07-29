@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:21:02 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 02:26:08 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/29 06:20:45 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ private:
 };
 
 extern "C" IGraphics *	glib_instantiate(const Snake &);
+extern "C" void			glib_uninstantiate(IGraphics * g);
+
 
 #endif

@@ -2,9 +2,9 @@ NAME		=	lib2.so
 SRC			=	$(shell ls | grep ".cpp")
 OBJ			=	$(subst .cpp,.o,$(SRC))
 
-CXX			?=	clang++
-CXXFLAGS	?=	-Wall -Wextra -Werror -std=c++11
-CXXFLAGS	+=	-I../include -ISFML/include
+CPP			?=	clang++
+CPPFLAGS	?=	-Wall -Wextra -Werror -std=c++11
+CPPFLAGS	+=	-I../include -ISFML/include
 
 LDFLAGS		=	-shared -fPIC
 LDFLAGS		+=	-LSFML/lib
@@ -17,7 +17,10 @@ LDFLAGS		+=	-lsfml-system
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(LDFLAGS) -o $(NAME) $(OBJ)
+	$(CPP) $(LDFLAGS) -o $(NAME) $(OBJ)
+
+%.o: %.cpp
+	$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 re: fclean all
 

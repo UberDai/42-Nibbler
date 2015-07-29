@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/29 03:45:32 by adebray          ###   ########.fr        #
+#    Updated: 2015/07/29 05:35:40 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ SRC_FILES	=	main.cpp \
 				GraphicsHandler.cpp \
 				Util.cpp
 
-export CXX		=	clang++
-export CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
+export CPP		=	clang++
+export CPPFLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
 LDFLAGS			=	-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 LDFLAGS			+=	-rpath lib2/SFML/lib -force_load lib3/glfw/src/libglfw3.a
 
@@ -44,11 +44,11 @@ _depend:
 
 $(BIN_NAME): $(OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(LDFLAGS) -o $(BIN_NAME) $^
+	$(CPP) $(LDFLAGS) -o $(BIN_NAME) $^
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.$(FILE_EXT)
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS)$(subst $() $(), -I, $(INC_DIR)) -o $@ -c $<
+	$(CPP) $(CPPFLAGS)$(subst $() $(), -I, $(INC_DIR)) -o $@ -c $<
 
 clean:
 	$(MAKE) -C lib1 clean

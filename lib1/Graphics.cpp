@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:24:33 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/29 03:35:23 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/29 12:09:20 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ extern "C" {
 Graphics::Graphics(const Snake & s) : _snake(s)
 {
 	initscr();
-	raw();
+	cbreak()
 	keypad(stdscr, TRUE);
 	noecho();
 }
@@ -88,4 +88,9 @@ void	Graphics::update(void)
 IGraphics *	glib_instantiate(const Snake & s)
 {
 	return new Graphics(s);
+}
+
+void		glib_uninstantiate(IGraphics * g)
+{
+	delete g;
 }
