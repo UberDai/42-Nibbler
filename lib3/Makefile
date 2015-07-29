@@ -4,7 +4,7 @@ OBJ			=	$(subst .cpp,.o,$(SRC))
 
 CXX			?=	clang++
 CXXFLAGS	?=	-Wall -Wextra -Werror -std=c++11
-CXXFLAGS	+=	-I../include -Iminilibx -fPIC
+CXXFLAGS	+=	-I../include -Iglfw/include -fPIC
 
 LDFLAGS		=	-shared -undefined dynamic_lookup
 

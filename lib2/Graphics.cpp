@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-27 02:07:50
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 01:23:57
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -69,12 +69,6 @@ void		Graphics::getLevelInfo()
 	_height = _snake.level->height;
 	_scaleWidth = _winWidth / _width;
 	_scaleHeight = _winHeight / _height;
-
-	std::cout << "DEBUG: " <<
-	"_width: " << _width <<
-	"_height: " << _height <<
-	"_scaleWidth: " << _scaleWidth <<
-	"_scaleHeight: " << _scaleHeight << std::endl;
 
 	_drawScale = _scaleHeight / 2;
 }

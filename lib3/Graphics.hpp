@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:56:40
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-26 23:20:24
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 02:15:36
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -16,7 +16,11 @@
 #ifndef GRAPHICS_HPP
 #define GRAPHICS_HPP
 
-# include "IGraphics.hpp"
+#include "IGraphics.hpp"
+
+extern "C" {
+	#include <GLFW/glfw3.h>
+}
 
 class Graphics : public IGraphics
 {
@@ -28,8 +32,8 @@ public:
 
 private:
 	const Snake &		_snake;
-	void *				_mlx;
-	void *				_window;
+
+	GLFWwindow *		_window;
 	unsigned int		_winWidth;
 	unsigned int		_winHeight;
 	unsigned int		_width;
@@ -45,7 +49,7 @@ private:
 	void				getLevelInfo();
 	void				_switch(int x, int y, int width, int height);
 	void				draw();
-	void				drawCell(int x, int y, int width, int height, int color);
+	void				drawCell(int x, int y, int width, int height);
 
 };
 

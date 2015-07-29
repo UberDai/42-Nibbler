@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-28 00:27:35
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 02:46:56
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -17,56 +17,65 @@
 #include "Graphics.hpp"
 
 extern "C" {
-	#include <unistd.h>
-	// #include <OpenGL/gl3.h>
-	// #include <mlx.h>
+	t_action	g_action;
 
-	int test(void) { return write(1, "test\n", 5); }
+	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		(void)window;
+		(void)scancode;
+		(void)mods;
+		if (key == GLFW_KEY_P && action == GLFW_PRESS){
+			std::cout << "Test" << std::endl;
+			g_action = PAUSE;
+		}
+		else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+			g_action = RIGHT;
+		else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+			g_action = LEFT;
+		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+			g_action = UP;
+		else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+			g_action = DOWN;
+	}
 }
 
 Graphics::Graphics(const Snake & s) : _snake(s)
 {
 	_winWidth = 800;
 	_winHeight = 600;
-	// _window = new sf::RenderWindow(sf::VideoMode(_winWidth, _winHeight), "Da SFML Snake");
-	// _mlx = mlx_init();
 
-	// mlx_key_hook ( _mlx, &test, NULL );
-	// int	mlx_hook(void *win_ptr, int x_event, int x_mask,
- //                 int (*funct)(), void *param);
-	// _window = mlx_new_window(_mlx, _winWidth, _winHeight, (char *)"Da MLX Snake");
+	if (!glfwInit())
+	{
+		std::cout << "glfw init error" << std::endl;
+		exit(-1);
+	}
 
 
-	// mlx_key_hook ( _window, &test, NULL );
-	// mlx_hook(_window, 3, 0, &test, NULL);
+	_window = glfwCreateWindow(_winWidth, _winHeight, "Hello World", NULL, NULL);
+	if (!_window)
+	{
+		glfwTerminate();
+		exit(-1);
+	}
 
+	glfwMakeContextCurrent(_window);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0f, _winWidth, _winHeight, 0.0f, 0.0f, 1.0f);
+
+	glfwSetKeyCallback(_window, &key_callback);
 }
 
 Graphics::~Graphics(void)
-{}
+{
+	glfwTerminate();
+}
 
 void		Graphics::update(void)
 {
-	// sf::Event event;
-
-	// while (_window->pollEvent(event))
-	// {
-	// 	if (event.type == sf::Event::Closed)
-	// 		_window->close();
-	// 	else if (event.type == sf::Event::KeyPressed)
-	// 	{
-	// 		if (event.key.code == sf::Keyboard::Escape)
-	// 			glib_action = PAUSE;
-	// 		if (event.key.code == sf::Keyboard::Up)
-	// 			glib_action = UP;
-	// 		if (event.key.code == sf::Keyboard::Down)
-	// 			glib_action = DOWN;
-	// 		if (event.key.code == sf::Keyboard::Left)
-	// 			glib_action = LEFT;
-	// 		if (event.key.code == sf::Keyboard::Right)
-	// 			glib_action = RIGHT;
-	// 	}
-	// }
+	glfwPollEvents();
+	glib_action = g_action;
 	draw();
 }
 
@@ -78,9 +87,9 @@ void		Graphics::getLevelInfo()
 	_scaleHeight = _winHeight / _height;
 
 	if (_scaleWidth < _scaleHeight)
-		_drawScale = _scaleWidth / 2;
+		_drawScale = _scaleWidth;
 	else
-		_drawScale = _scaleHeight / 2;
+		_drawScale = _scaleHeight;
 }
 
 void		Graphics::_switch(int x, int y, int width, int height)
@@ -88,47 +97,42 @@ void		Graphics::_switch(int x, int y, int width, int height)
 	switch (_snake.level->map[y][x])
 	{
 		case BLOCK_NONE:
-			drawCell(x * width, y * width, width, height, 0xffffff);
-			// SDrawer::drawCell(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
+			glColor3f(1.0f, 1.0f, 1.0f);
+			drawCell(x * width, y * width, width, height);
 			break;
 		case BLOCK_WALL:
-			drawCell(x * width, y * width, width, height, 0xacacac);
-			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(200, 200, 200));
+			glColor3f(0.9f, 0.9f, 0.9f);
+			drawCell(x * width, y * width, width, height);
 			break;
 		case BLOCK_NOM:
-			drawCell(x * width, y * width, width, height, 0xff0000);
-			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(242, 43, 0));
+			glColor3f(1.0f, 0.0f, 0.0f);
+			drawCell(x * width, y * width, width, height);
 			break;
 		case BLOCK_HEAD:
-			drawCell(x * width, y * width, width, height, 0xcccc00);
-			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(76, 153, 0));
+			glColor3f(0.0f, 1.0f, 0.0f);
+			drawCell(x * width, y * width, width, height);
 			break;
 		default:
-			drawCell(x * width, y * width, width, height, 0x00ee00);
+			glColor3f(0.0f, 0.8f, 0.0f);
+			drawCell(x * width, y * width, width, height);
 		;
-			// SDrawer::drawFull(_window, sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y), sf::Color(204, 102, 0));
 	}
 }
 
-void		Graphics::drawCell(int x, int y, int width, int height, int color)
+void		Graphics::drawCell(int x, int y, int width, int height)
 {
-	(void)x;
-	(void)y;
-	(void)width;
-	(void)height;
-	(void)color;
-	// for (int i = 0; i < width; ++i)
-	// {
-	// 	for (int j = 0; j < height; ++j)
-	// 	{
-			// mlx_pixel_put( _mlx, _window, x + i, y + j, color);
-	// 	}
-	// }
+	glBegin(GL_QUADS);
+	glVertex2f((GLfloat)x, (GLfloat)y);
+	glVertex2f((GLfloat)x + width, (GLfloat)y);
+	glVertex2f((GLfloat)x + width, (GLfloat)y + height);
+	glVertex2f((GLfloat)x, (GLfloat)y + height);
+	glEnd();
 }
 
 void		Graphics::draw(void)
 {
 	getLevelInfo();
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	unsigned int i;
 	unsigned int j;
@@ -136,13 +140,11 @@ void		Graphics::draw(void)
 	{
 		for(j = 0; j < _snake.level->height; j++)
 		{
-			_switch(i, j, 10, 10);
+			_switch(i, j, _drawScale, _drawScale);
 		}
 	}
 
-	// mlx_do_sync(_mlx);
-	// mlx_loop(_mlx);
-	// _window->display();
+	glfwSwapBuffers(_window);
 }
 
 IGraphics *	glib_instantiate(const Snake & s)

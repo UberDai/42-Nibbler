@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/07/28 01:21:44 by adebray          ###   ########.fr        #
+#    Updated: 2015/07/29 01:27:18 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC_FILES	=	main.cpp \
 
 export CXX		=	clang++
 export CXXFLAGS	=	-Wall -Werror -Wextra -pedantic -g3 -std=c++11 -stdlib=libc++
-LDFLAGS			=	-rpath lib2/SFML/lib
+LDFLAGS			=	-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+LDFLAGS			+=	-rpath lib2/SFML/lib -force_load lib3/glfw/src/libglfw3.a
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.$(FILE_EXT)=.o))
