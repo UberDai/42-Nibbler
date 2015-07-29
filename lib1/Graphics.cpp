@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Graphics.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:24:33 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/25 23:30:55 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/29 03:35:23 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,75 @@
 #include "Graphics.hpp"
 #include "Snake.hpp"
 
+extern "C" {
+	#include <curses.h>
+}
+
 Graphics::Graphics(const Snake & s) : _snake(s)
-{}
+{
+	initscr();
+	raw();
+	keypad(stdscr, TRUE);
+	noecho();
+}
 
 Graphics::~Graphics()
-{}
+{
+	endwin();
+}
 
 void	Graphics::update(void)
 {
+	clear();
 	unsigned	x;
 	unsigned	y;
 
 	if (_snake.clockCountdown > 0)
 		return ;
 
-	std::cout << std::endl;
-	std::cout << "---------------" << std::endl;
-	std::cout << "Size: " << _snake.player.size << std::endl;
-	std::cout << "Pending nom: " << _snake.player.pendingNom << std::endl;
-	std::cout << std::endl;
+	printw("\n"); // << std::endl;
+	printw("---------------\n"); // << "---------------" << std::endl;
+	printw("Size: %d\n", _snake.player.size); // << "Size: " << _snake.player.size << std::endl;
+	printw("Pending nom: \n", _snake.player.pendingNom); // << "Pending nom: " << _snake.player.pendingNom << std::endl;
+	printw("\n"); // << std::endl;
 
 	y = 0;
 	while (y < _snake.level->height)
 	{
-		std::cout << "   ";
+		printw("   "); // << "   ";
 		x = 0;
 		while (x < _snake.level->width)
 		{
 			switch (_snake.level->map[y][x])
 			{
 				case BLOCK_NONE:
-					std::cout << ' ';
+					printw(" "); // << ' ';
 					break;
 				case BLOCK_WALL:
-					std::cout << "\u25AF";
+					printw("/"); // << "\u25AF";
 					break;
 				case BLOCK_NOM:
-					std::cout << "x";
+					printw("x"); // << "x";
 					break;
 				case BLOCK_HEAD:
-					std::cout << 'O';
+					printw("O"); // << 'O';
 					break;
 				default:
-					std::cout << 'o';
+					printw("o"); // << 'o';
 			}
-			std::cout << ' ';
+			printw(" "); // << ' ';
 			x++;
 		}
 
-		std::cout << std::endl;
+		printw("\n"); // << std::endl;
 		y++;
 	}
 
-	std::cout << "---------------" << std::endl;
-	std::cout << std::endl;
+	printw("---------------\n"); // << "---------------" << std::endl;
+	printw("\n"); // << std::endl;
+	int ch = getch();
+	printw("%d\n", ch);
+	refresh();
 }
 
 IGraphics *	glib_instantiate(const Snake & s)

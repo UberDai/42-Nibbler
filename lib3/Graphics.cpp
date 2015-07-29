@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 02:46:56
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 03:15:05
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -28,14 +28,16 @@ extern "C" {
 			std::cout << "Test" << std::endl;
 			g_action = PAUSE;
 		}
-		else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+		if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
 			g_action = RIGHT;
-		else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+		if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
 			g_action = LEFT;
-		else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+		if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 			g_action = UP;
-		else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+		if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
 			g_action = DOWN;
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+			g_action = QUIT;
 	}
 }
 
@@ -75,7 +77,9 @@ Graphics::~Graphics(void)
 void		Graphics::update(void)
 {
 	glfwPollEvents();
+	std::cout << g_action << std::endl;
 	glib_action = g_action;
+	std::cout << glib_action << std::endl;
 	draw();
 }
 

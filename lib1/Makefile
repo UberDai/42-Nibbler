@@ -5,7 +5,7 @@ OBJ			=	$(subst .cpp,.o,$(SRC))
 CXX			?=	clang++
 CXXFLAGS	?=	-Wall -Wextra -Werror -std=c++11
 CXXFLAGS	+=	-I../include
-LDFLAGS		=	-shared -fPIC
+LDFLAGS		=	-shared -fPIC -lncurses
 
 all: $(NAME)
 
