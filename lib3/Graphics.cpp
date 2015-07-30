@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 03:15:05
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-30 05:13:26
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -24,10 +24,8 @@ extern "C" {
 		(void)window;
 		(void)scancode;
 		(void)mods;
-		if (key == GLFW_KEY_P && action == GLFW_PRESS){
-			std::cout << "Test" << std::endl;
+		if (key == GLFW_KEY_P && action == GLFW_PRESS)
 			g_action = PAUSE;
-		}
 		if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
 			g_action = RIGHT;
 		if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
@@ -38,6 +36,10 @@ extern "C" {
 			g_action = DOWN;
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			g_action = QUIT;
+		if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+			g_action = LIB1;
+		if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+			g_action = LIB2;
 	}
 }
 
@@ -77,9 +79,7 @@ Graphics::~Graphics(void)
 void		Graphics::update(void)
 {
 	glfwPollEvents();
-	std::cout << g_action << std::endl;
 	glib_action = g_action;
-	std::cout << glib_action << std::endl;
 	draw();
 }
 

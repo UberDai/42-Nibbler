@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:24:33 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/29 12:09:20 by adebray          ###   ########.fr       */
+/*   Updated: 2015/07/30 05:06:20 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 
 extern "C" {
 	#include <curses.h>
+	#include <unistd.h>
 }
 
 Graphics::Graphics(const Snake & s) : _snake(s)
 {
 	initscr();
-	cbreak()
+	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
+	timeout(1);
 }
 
 Graphics::~Graphics()
@@ -37,8 +39,31 @@ void	Graphics::update(void)
 	unsigned	x;
 	unsigned	y;
 
-	if (_snake.clockCountdown > 0)
-		return ;
+	// if (_snake.clockCountdown > 0) {
+	// 	return ;
+	// }
+
+		int ch;
+
+		while ((ch = getch()) != -1)
+		{
+			if (ch == 112)
+				glib_action = PAUSE;
+			if (ch == 258)
+				glib_action = DOWN;
+			if (ch == 259)
+				glib_action = UP;
+			if (ch == 260)
+				glib_action = RIGHT;
+			if (ch == 261)
+				glib_action = LEFT;
+			if (ch == 50)
+				glib_action = LIB2;
+			if (ch == 51)
+				glib_action = LIB3;
+			printw("%d\n", ch);
+		}
+
 
 	printw("\n"); // << std::endl;
 	printw("---------------\n"); // << "---------------" << std::endl;
@@ -80,9 +105,8 @@ void	Graphics::update(void)
 
 	printw("---------------\n"); // << "---------------" << std::endl;
 	printw("\n"); // << std::endl;
-	int ch = getch();
-	printw("%d\n", ch);
 	refresh();
+	usleep(50000);
 }
 
 IGraphics *	glib_instantiate(const Snake & s)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 17:56:26 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 21:01:30 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/30 05:00:10 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef enum		e_action
 	PAUSE,
 	QUIT,
 	LIB1,
-	LIB2
+	LIB2,
+	LIB3
 }					t_action;
 
 class Snake

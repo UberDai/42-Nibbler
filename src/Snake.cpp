@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/26 21:09:03 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/07/30 05:00:38 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,10 @@ void	Snake::handleAction()
 		case LIB2:
 			paused = true;
 			loadLibrary("lib2/lib2.so");
+			break;
+		case LIB3:
+			paused = true;
+			loadLibrary("lib3/lib3.so");
 			break;
 		case QUIT:
 			stop = true;

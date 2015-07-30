@@ -6,7 +6,7 @@
 // /ddddy:oddddddddds:sddddd/ By adebray - adebray
 // sdddddddddddddddddddddddds
 // sdddddddddddddddddddddddds Created: 2015-07-23 23:54:14
-// :ddddddddddhyyddddddddddd: Modified: 2015-07-29 01:23:57
+// :ddddddddddhyyddddddddddd: Modified: 2015-07-30 05:02:50
 //  odddddddd/`:-`sdddddddds
 //   +ddddddh`+dh +dddddddo
 //    -sdddddh///sdddddds-
@@ -58,6 +58,10 @@ void		Graphics::update(void)
 				glib_action = LEFT;
 			if (event.key.code == sf::Keyboard::Right)
 				glib_action = RIGHT;
+			if (event.key.code == sf::Keyboard::Num1)
+				glib_action = LIB1;
+			if (event.key.code == sf::Keyboard::Num3)
+				glib_action = LIB3;
 		}
 	}
 	draw();
