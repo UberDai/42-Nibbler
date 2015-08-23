@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Graphics.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 00:24:33 by amaurer           #+#    #+#             */
-/*   Updated: 2015/08/14 18:16:23 by adebray          ###   ########.fr       */
+/*   Updated: 2015/08/23 12:14:27 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ void	Graphics::update(void)
 	}
 
 
-	printw("\n");
-	printw("---------------\n");
-	printw("Size: %d\n", _snake.player.size);
-	printw("Pending nom: \n", _snake.player.pendingNom);
-	printw("\n");
-
 	y = 0;
 	while (y < _snake.level->height)
 	{
@@ -98,8 +92,6 @@ void	Graphics::update(void)
 		y++;
 	}
 
-	printw("---------------\n");
-	printw("\n");
 	refresh();
 	usleep(50000);
 }

@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/08/23 12:10:16 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/08/23 12:14:51 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ void	Snake::loadLibrary(const std::string name)
 	if (ghandler != NULL)
 		delete ghandler;
 
-	std::cout << 4 << std::endl;
 	ghandler = new GraphicsHandler(*this);
-	std::cout << 5 << std::endl;
 
 	try
 	{
@@ -103,7 +101,6 @@ void	Snake::loadLibrary(const std::string name)
 		std::cout << "Library error: " << e.what() << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	std::cout << 6 << std::endl;
 }
 
 void	Snake::removeNoms()
@@ -205,19 +202,23 @@ void	Snake::handleAction()
 	switch (GraphicsHandler::instance->glib_action)
 	{
 		case UP:
+			paused = false;
 			player.changeOrientation(NORTH);
 			break;
 		case DOWN:
+			paused = false;
 			player.changeOrientation(SOUTH);
 			break;
 		case LEFT:
+			paused = false;
 			player.changeOrientation(WEST);
 			break;
 		case RIGHT:
+			paused = false;
 			player.changeOrientation(EAST);
 			break;
 		case PAUSE:
-			paused = !paused;
+			paused = true;
 			break;
 		case LIB1:
 			paused = true;
