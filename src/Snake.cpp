@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/30 05:00:38 by adebray          ###   ########.fr       */
+/*   Updated: 2015/08/23 12:03:43 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void	Snake::update()
 	static float	lastTime;
 	float			currentTime;
 
-	if (lastTime == 0)
+	if (lastTime == 0 || paused)
 		lastTime = Util::getTime();
 
 	GraphicsHandler::instance->update();
@@ -179,6 +179,7 @@ void	Snake::update()
 
 	if (clockCountdown <= 0)
 	{
+		std::cout << "dra" << std::endl;
 		player.orientation = player.pendingOrientation;
 
 		if (player.move() == false)
