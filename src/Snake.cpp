@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Snake.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/08/23 12:14:51 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/08/23 22:30:13 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ Snake::~Snake()
 {
 	if (level != NULL)
 		delete level;
+	if (ghandler != NULL)
+		delete ghandler;
 }
 
 void	Snake::loadLevel(const std::string pathname)
@@ -158,6 +160,7 @@ void	Snake::launch()
 	stop = false;
 	while (!stop)
 		update();
+
 }
 
 void	Snake::update()
