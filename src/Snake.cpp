@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 21:55:03 by amaurer           #+#    #+#             */
-/*   Updated: 2015/08/23 12:03:43 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/08/23 12:10:16 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ void	Snake::update()
 
 	if (clockCountdown <= 0)
 	{
-		std::cout << "dra" << std::endl;
 		player.orientation = player.pendingOrientation;
 
 		if (player.move() == false)
